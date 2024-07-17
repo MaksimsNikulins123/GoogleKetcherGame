@@ -4,7 +4,10 @@ import {
 import {
     getGameStatus,
     subscribe
-} from "../../core/state-manger.js";
+} from "../../core/state-manger.proxy.js";
+import {
+    AudioComponent
+} from "./Audio/Audio.component.js";
 import {
     GridComponent
 } from "./Grid/Grid.component.js";
@@ -20,6 +23,9 @@ import {
 import {
     StartComponent
 } from "./Start/Start.component.js";
+import {
+    WinComponent
+} from "./Win/Win.component.js";
 
 export function AppComponent() {
 
@@ -28,8 +34,12 @@ export function AppComponent() {
         cleanupFunctions: [],
     };
 
-    console.log('App component created')
+    // console.log('App component created')
     const element = document.createElement('div');
+    element.classList.add('app');
+
+    const audioComponent = AudioComponent()
+
 
     subscribe(() => {
         render(element, localState);
@@ -50,7 +60,7 @@ async function render(element, localState) {
 
     localState.prevGameStatus = gameStatus;
 
-    console.log('App component render');
+    // console.log('App component render');
 
     localState.cleanupFunctions.forEach(cleanupFunction => cleanupFunction());
     localState.cleanupFunctions = [];
@@ -60,7 +70,7 @@ async function render(element, localState) {
     switch (gameStatus) {
         case GAME_STATUSES.SETTINGS: {
             const settingsComponent = SettingsComponent();
-             // localState.cleanupFunctions.push(settingsComponent.cleanup)
+            // localState.cleanupFunctions.push(settingsComponent.cleanup)
             const startComponent = StartComponent();
             // localState.cleanupFunctions.push(startComponent.cleanup)
             element.append(settingsComponent.element, startComponent.element);
@@ -73,12 +83,18 @@ async function render(element, localState) {
             localState.cleanupFunctions.push(resultPanelComponent.cleanup)
             const gridComponent = GridComponent();
             localState.cleanupFunctions.push(gridComponent.cleanup)
+
             element.append(settingsComponent.element, resultPanelComponent.element, gridComponent.element)
             break;
         case GAME_STATUSES.LOSE:
             const loseComponent = LoseComponent();
             //    localState.cleanupFunctions.push(loseComponent.cleanup)
             element.append(loseComponent.element)
+            break;
+        case GAME_STATUSES.WIN:
+            const winComponent = WinComponent();
+            //    localState.cleanupFunctions.push(loseComponent.cleanup)
+            element.append(winComponent.element)
             break;
 
         default:

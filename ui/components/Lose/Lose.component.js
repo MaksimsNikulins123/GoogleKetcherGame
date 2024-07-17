@@ -1,6 +1,6 @@
 import {
     playAgain
-} from "../../../core/state-manger.js";
+} from "../../../core/state-manger.proxy.js";
 
 export function LoseComponent() {
     const element = document.createElement('div');

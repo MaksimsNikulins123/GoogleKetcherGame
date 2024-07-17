@@ -1,18 +1,23 @@
+import { EVENTS } from "../../../core/constans.js";
 import {
     getGooglePoints,
     getPlayerPoints,
     subscribe,
     unsubscribe
-} from "../../../core/state-manger.js";
+} from "../../../core/state-manger.proxy.js";
 
 export function ResultPanelComponent() {
-    console.log("ResultPanelComponent created")
+    // console.log("ResultPanelComponent created")
     const element = document.createElement('div');
 
     element.classList.add('result-panel');
 
-    const observer = () => {
-        render(element);
+    const observer = (e) => {
+
+        if(e.name === EVENTS.SCORES_CHANGED) {
+            render(element);
+        }
+        
     }
     subscribe(observer)
 
@@ -25,7 +30,7 @@ export function ResultPanelComponent() {
 }
 
 async function render(element) {
-    console.log("ResultPanelComponent render")
+    // console.log("ResultPanelComponent render")
 
     element.innerHTML = '';
 

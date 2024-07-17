@@ -1,6 +1,6 @@
 import {
     start
-} from "../../../core/state-manger.js";
+} from "../../../core/state-manger.proxy.js";
 
 export function StartComponent() {
     // console.log("StartComponent created")
