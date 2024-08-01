@@ -7,10 +7,12 @@ import {
     getGridSize,
     getPlayerPoints,
     getPlayerPosition,
+    getSoundStatus,
     movePlayer,
     playAgain,
     start,
     subscribe,
+    toggleSound,
     unsubscribe
 } from '../core/state-manger.server.js';
 
@@ -45,7 +47,7 @@ app.get('/events', (req, res) => {
 
 
 app.get('/start', async (req, res) => {
-    //   res.send('Hello, world!');
+ 
     await start()
     res.send(200);
 });
@@ -57,12 +59,16 @@ app.get('/movePlayer', async (req, res) => {
     await movePlayer(req.query.playerNumber, req.query.direction);
     res.send(200);
 });
+app.get('/toggleSound', async (req, res) => {
+    await toggleSound(req.query.status);
+    res.send(200);
+    
+});
 app.get('/getGooglePoints', async (req, res) => {
     const googlePoints = await getGooglePoints();
     res.send({data: googlePoints});
 });
 app.get('/getPlayerPoints', async (req, res) => {
-    // console.log(req.query);
     const playerPoints = await getPlayerPoints(req.query.playerNumber);
     res.send({data: playerPoints});
 });
@@ -79,10 +85,12 @@ app.get('/getGooglePosition', async (req, res) => {
     res.send({data: googlePosition});
 });
 app.get('/getPlayerPosition', async (req, res) => {
-    // console.log(req.query);
     const playerPosition = await getPlayerPosition(req.query.playerNumber);
     res.send({data: playerPosition});
-    //  console.log(playerPosition);
+});
+app.get('/getSoundStatus', async (req, res) => {
+    const soundStatus = await getSoundStatus();
+    res.send({data: soundStatus});
 });
 
 app.listen(port, () => {

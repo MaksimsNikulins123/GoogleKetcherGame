@@ -61,6 +61,7 @@ async function render(element, localState) {
     localState.prevGameStatus = gameStatus;
 
     // console.log('App component render');
+    // console.log(gameStatus);
 
     localState.cleanupFunctions.forEach(cleanupFunction => cleanupFunction());
     localState.cleanupFunctions = [];
@@ -70,7 +71,7 @@ async function render(element, localState) {
     switch (gameStatus) {
         case GAME_STATUSES.SETTINGS: {
             const settingsComponent = SettingsComponent();
-            // localState.cleanupFunctions.push(settingsComponent.cleanup)
+            localState.cleanupFunctions.push(settingsComponent.cleanup)
             const startComponent = StartComponent();
             // localState.cleanupFunctions.push(startComponent.cleanup)
             element.append(settingsComponent.element, startComponent.element);

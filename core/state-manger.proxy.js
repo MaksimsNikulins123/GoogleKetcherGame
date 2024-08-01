@@ -45,6 +45,10 @@ export async function playAgain() {
 export async function movePlayer(playerNumber, direction) {
     fetch(`http://localhost:3000/movePlayer?playerNumber=${playerNumber}&direction=${direction}`);
 }
+export async function toggleSound(status) {
+    console.log('Request to backend to change sound status')
+    fetch(`http://localhost:3000/toggleSound?status=${status}`);
+}
 //GETTERS/SELECTORS/QUERY
 export async function getGooglePoints() {
     const response = await fetch("http://localhost:3000/getGooglePoints");
@@ -78,6 +82,11 @@ export async function getGooglePosition() {
 }
 export async function getPlayerPosition(playerNumber) {
     const response = await fetch(`http://localhost:3000/getPlayerPosition?playerNumber=${playerNumber}`);
+    const responsePayload = await response.json();
+    return responsePayload.data;
+}
+export async function getSoundStatus() {
+    const response = await fetch("http://localhost:3000/getSoundStatus");
     const responsePayload = await response.json();
     return responsePayload.data;
 }

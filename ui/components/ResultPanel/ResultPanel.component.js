@@ -1,3 +1,5 @@
+// import classes from './index.module.scss'
+// import classes from './index.css'
 import { EVENTS } from "../../../core/constans.js";
 import {
     getGooglePoints,

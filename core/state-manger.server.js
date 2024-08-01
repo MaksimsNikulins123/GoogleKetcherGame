@@ -1,4 +1,4 @@
-import { EVENTS, GAME_STATUSES, MOVING_DERECTIONS } from "./constans.js";
+import { EVENTS, GAME_STATUSES, MOVING_DERECTIONS, SOUND_STATUSES } from "./constans.js";
 
 const _state = {
     gameStatus: GAME_STATUSES.SETTINGS,
@@ -8,11 +8,14 @@ const _state = {
          */
         googleJumpInterval: 2000,
         gridSize: {
+            maxRowCount: 10,
+            maxColumnCount: 10,
             rowsCount: 5,
             columnsCount: 5
         },
-        pointsToLose: 50,
+        pointsToLose: 10,
         pointsToWin: 5,
+        sound: SOUND_STATUSES.ON,
     },
     positions: {
         google: {
@@ -221,6 +224,28 @@ export async function movePlayer(playerNumber, direction) {
     });
 
 }
+export async function toggleSound(status) {
+    // console.log(status)
+   
+    const prevStatus = {..._state.settings.sound}
+    const newStatus = {..._state.settings.sound}
+
+    switch (status) {
+        case SOUND_STATUSES.ON:
+            newStatus = 'on';
+            break;
+        case SOUND_STATUSES.OFF:
+            newStatus = 'off';
+            break;
+    }
+    
+    _state.settings.sound = newStatus;
+    _notifyObservers(EVENTS.SOUND_STATUS_CHANGED, {
+        prevStatus: prevStatus,
+        newStatus: newStatus,
+    });
+
+}
 //GETTERS/SELECTORS/QUERY
 export async function getGooglePoints() {
     return _state.points.google
@@ -252,6 +277,10 @@ export async function getPlayerPosition(playerNumber) {
     return {
         ..._state.positions.players[playerIndex]
     }
+}
+export async function getSoundStatus() { 
+    return _state.settings.sound
+    
 }
 
 

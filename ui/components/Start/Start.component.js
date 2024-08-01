@@ -5,7 +5,7 @@ import {
 export function StartComponent() {
     // console.log("StartComponent created")
     const element = document.createElement('div');
-
+    element.classList.add('content');
     render(element)
 
     return {
