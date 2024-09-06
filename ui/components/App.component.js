@@ -54,7 +54,10 @@ export function AppComponent() {
 
 async function render(element, localState) {
 
-    const gameStatus = await getGameStatus();
+    const gameStatusPromise = getGameStatus();
+    const gameStatus = await gameStatusPromise;
+
+    console.log(gameStatus);
 
     if (localState.prevGameStatus === gameStatus) return;
 
@@ -79,7 +82,7 @@ async function render(element, localState) {
         }
         case GAME_STATUSES.IN_PROGRESS:
             const settingsComponent = SettingsComponent();
-            // localState.cleanupFunctions.push(settingsComponent.cleanup)
+            localState.cleanupFunctions.push(settingsComponent.cleanup)
             const resultPanelComponent = ResultPanelComponent();
             localState.cleanupFunctions.push(resultPanelComponent.cleanup)
             const gridComponent = GridComponent();

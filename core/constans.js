@@ -6,8 +6,8 @@ export const GAME_STATUSES = {
 }
 
 export const SOUND_STATUSES = {
-    OFF: 'off',
-    ON: 'on',
+    OFF: 'false',
+    ON: 'true',
 }
 
 export const EVENTS = {

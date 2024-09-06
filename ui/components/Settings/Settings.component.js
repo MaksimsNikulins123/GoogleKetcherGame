@@ -1,6 +1,3 @@
-import { EVENTS } from "../../../core/constans.js";
-import { subscribe, unsubscribe } from "../../../core/state-manger.proxy.js";
-import { CheckboxComponent } from "../common/Checkbox/Checkbox.componenet.js";
 import { GridSizeComponent } from "./GridSize/GridSize.component.js";
 import { PointsToLoseComponent } from "./PointsToLose/PointsTolose.component.js";
 import { PointsToWinComponent } from "./PointsToWin/PointsToWin.component.js";
@@ -12,22 +9,11 @@ export function SettingsComponent() {
     const element = document.createElement('div');
     element.classList.add('settings');
 
-
-    const observer = (e) => {
-
-        if(e.name === EVENTS.SOUND_STATUS_CHANGED) {
-            render(element);
-        }
-        
-    };
-
-    subscribe(observer);
-
     render(element)
 
     return {
         element,
-        cleanup: () => {unsubscribe(observer)},
+        cleanup: () => {},
     };
 }
 

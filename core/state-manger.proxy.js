@@ -1,3 +1,4 @@
+
 // Create a new EventSource object, pointing to the SSE endpoint
 const eventSource = new EventSource('http://localhost:3000/events');
  
@@ -7,6 +8,7 @@ eventSource.addEventListener('message', (eventSourseEvent) => {
 
     _notifyObservers(event.name, event.payload);
 })
+
 //OBSERVER
 let _observers = [];
 export function subscribe(observer) {
@@ -46,7 +48,6 @@ export async function movePlayer(playerNumber, direction) {
     fetch(`http://localhost:3000/movePlayer?playerNumber=${playerNumber}&direction=${direction}`);
 }
 export async function toggleSound(status) {
-    console.log('Request to backend to change sound status')
     fetch(`http://localhost:3000/toggleSound?status=${status}`);
 }
 //GETTERS/SELECTORS/QUERY

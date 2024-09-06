@@ -24,7 +24,7 @@ app.use(cors());
 const port = 3000;
 
 
-app.get('/events', (req, res) => {
+app.get('/events', cors(), (req, res) => {
     res.setHeader('Content-Type', 'text/event-stream');
     res.setHeader('Cache-Control', 'no-cache');
     res.setHeader('Connection', 'keep-alive');

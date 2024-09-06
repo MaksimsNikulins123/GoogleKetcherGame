@@ -15,7 +15,7 @@ const _state = {
         },
         pointsToLose: 10,
         pointsToWin: 5,
-        sound: SOUND_STATUSES.ON,
+        sound: SOUND_STATUSES.OFF,
     },
     positions: {
         google: {
@@ -225,25 +225,13 @@ export async function movePlayer(playerNumber, direction) {
 
 }
 export async function toggleSound(status) {
-    // console.log(status)
-   
-    const prevStatus = {..._state.settings.sound}
-    const newStatus = {..._state.settings.sound}
-
-    switch (status) {
-        case SOUND_STATUSES.ON:
-            newStatus = 'on';
-            break;
-        case SOUND_STATUSES.OFF:
-            newStatus = 'off';
-            break;
-    }
     
-    _state.settings.sound = newStatus;
+    if(_state.settings.sound === status) return;
+    
+    _state.settings.sound = status;
     _notifyObservers(EVENTS.SOUND_STATUS_CHANGED, {
-        prevStatus: prevStatus,
-        newStatus: newStatus,
-    });
+        status
+    } );
 
 }
 //GETTERS/SELECTORS/QUERY
