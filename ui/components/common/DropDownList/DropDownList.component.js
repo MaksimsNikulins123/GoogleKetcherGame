@@ -2,6 +2,12 @@
 
 export function DropDownListComponent(data) {
     //  console.log("SettingsComponent created")
+
+    const localState = {
+        prevButtonTitle: data.title,
+        cleanupFunctions: [],
+        
+    }
     const element = document.createElement('div');
     element.classList.add('dropdown');
 
@@ -34,14 +40,23 @@ async function render(element, data) {
     }
 
     select.addEventListener('click', () => {
+        document.querySelectorAll('ul').forEach(element => {
+            element.classList.add('hide')            
+        });
         _toggleDropDownList(list);
-    })
 
+        list.addEventListener('click', (e) => { 
+            list.classList.add('hide')
+            console.log(e.target.innerHTML)
+        } )    
+      
+    })
     element.append(select, list);
 }
 
 
 function _toggleDropDownList(list) {
+   
     if (list.classList.contains('hide') == true) {
         list.classList.remove('hide');
     } else {

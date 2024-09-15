@@ -5,9 +5,11 @@ import {
     getGooglePoints,
     getGooglePosition,
     getGridSize,
-    getGridSizeButtonValue,
+    getGridSizeBlockValues,
     getPlayerPoints,
     getPlayerPosition,
+    getPointsToLoseBlockValues,
+    getPointsToWinBlockValues,
     getSoundStatus,
     movePlayer,
     playAgain,
@@ -16,6 +18,7 @@ import {
     toggleSound,
     unsubscribe
 } from '../core/state-manger.server.js';
+
 
 
 const app = express();
@@ -77,9 +80,17 @@ app.get('/getGameStatus', async (req, res) => {
     const gameStatus = await getGameStatus();
     res.send({data: gameStatus});
 });
-app.get('/getGridSizeButtonValue', async (req, res) => {
-    const gridSizeButtonValue = await getGridSizeButtonValue();
-    res.send({data: gridSizeButtonValue});
+app.get('/getGridSizeBlockValues', async (req, res) => {
+    const gridSizeBlockValues = await getGridSizeBlockValues();
+    res.send({data: gridSizeBlockValues});
+});
+app.get('/getPointsToWinBlockValues', async (req, res) => {
+    const pointsToWinBlockValues = await getPointsToWinBlockValues();
+    res.send({data: pointsToWinBlockValues});
+});
+app.get('/getPointsToLoseBlockValues', async (req, res) => {
+    const pointsToLoseBlockValues = await getPointsToLoseBlockValues();
+    res.send({data: pointsToLoseBlockValues});
 });
 app.get('/getGridSize', async (req, res) => {
     const gridSize = await getGridSize();

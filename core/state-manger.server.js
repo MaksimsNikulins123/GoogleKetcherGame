@@ -1,4 +1,4 @@
-import { EVENTS, GAME_STATUSES, GRID_SIZE_BUTTON_VALUE, MOVING_DERECTIONS, SOUND_STATUSES } from "./constans.js";
+import { EVENTS, GAME_STATUSES, GRID_SIZE_BLOCK_VALUES, MOVING_DERECTIONS, POINST_TO_LOSE_BLOCK_VALUES, POINST_TO_WIN_BLOCK_VALUES, SOUND_STATUSES } from "./constans.js";
 
 const _state = {
     gameStatus: GAME_STATUSES.SETTINGS,
@@ -7,7 +7,10 @@ const _state = {
          * in miliseconds 
          */
         googleJumpInterval: 2000,
-        gridSizeButtonValue: GRID_SIZE_BUTTON_VALUE,
+        gridSizeBlockValues: GRID_SIZE_BLOCK_VALUES,
+        pointsToWinBlockValues: POINST_TO_WIN_BLOCK_VALUES,
+        pointsToLoseBlockValues: POINST_TO_LOSE_BLOCK_VALUES,
+        selectedGridSize: null,
         gridSize: {
             maxRowCount: 10,
             maxColumnCount: 10,
@@ -251,9 +254,19 @@ export async function getPlayerPoints(playerNumber) {
 export async function getGameStatus() {
     return _state.gameStatus
 }
-export async function getGridSizeButtonValue() {
+export async function getGridSizeBlockValues() {
     return {
-        ..._state.settings.gridSizeButtonValue
+        ..._state.settings.gridSizeBlockValues
+    }
+}
+export async function getPointsToWinBlockValues() {
+    return {
+        ..._state.settings.pointsToWinBlockValues
+    }
+}
+export async function getPointsToLoseBlockValues() {
+    return {
+        ..._state.settings.pointsToLoseBlockValues
     }
 }
 export async function getGridSize() {

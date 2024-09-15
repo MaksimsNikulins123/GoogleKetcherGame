@@ -28,7 +28,27 @@ export const MOVING_DERECTIONS = {
     RIGHT: 'right',
 }
 
-export const GRID_SIZE_BUTTON_VALUE = {
-    title: 'Select grid size',
-    payload: ['5:5', '10:10', '15:15', '20:20', '25:25', '30:30']
+export const GRID_SIZE_BLOCK_VALUES = {
+    title: 'Grid size',
+    button: {
+        title: 'Select grid size',
+        payload: ['5:5', '10:10', '15:15', '20:20', '25:25', '30:30']
+    }
+   
+}
+export const POINST_TO_WIN_BLOCK_VALUES = {
+    title: 'Points to win',
+    button: {
+        title: 'Select points to win',
+        payload: [10, 20, 30, 40, 50]
+    }
+   
+}
+export const POINST_TO_LOSE_BLOCK_VALUES = {
+    title: 'Points to lose',
+    button: {
+        title: 'Select points to lose',
+        payload: [10, 20, 30, 40, 50]
+    }
+   
 }

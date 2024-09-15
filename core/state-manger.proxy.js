@@ -71,8 +71,18 @@ export async function getGameStatus() {
     const responsePayload = await response.json();
     return responsePayload.data;
 }
-export async function getGridSizeButtonValue() {
-    const response = await fetch("http://localhost:3000/getGridSizeButtonValue");
+export async function getGridSizeBlockValues() {
+    const response = await fetch("http://localhost:3000/getGridSizeBlockValues");
+    const responsePayload = await response.json();
+    return responsePayload.data;
+}
+export async function getPointsToWinBlockValues() {
+    const response = await fetch("http://localhost:3000/getPointsToWinBlockValues");
+    const responsePayload = await response.json();
+    return responsePayload.data;
+}
+export async function getPointsToLoseBlockValues() {
+    const response = await fetch("http://localhost:3000/getPointsToLoseBlockValues");
     const responsePayload = await response.json();
     return responsePayload.data;
 }

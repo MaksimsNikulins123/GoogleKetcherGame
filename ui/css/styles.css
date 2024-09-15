@@ -41,10 +41,12 @@ body, html {
 }
 
 .dropdown {
-    position: relative;
-    display: inline-block;
+    display: flex;
+    justify-content: center;
      }
 .dropdown-toggle {
+    position: relative;
+    
     background-color: #3498db;
     color: white;
     padding: 10px 20px;
@@ -62,13 +64,12 @@ body, html {
     position: absolute;
     background-color: #f9f9f9;
     color: black;
-    width: 100%;
-    /* min-width: 160px; */
+    /* width: 100%; */
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
     z-index: 1;
     border-radius: 4px;
-    margin-top: 5px;
-    padding: 0;
+    margin-top: 50px;
+    padding: 0 20px;
   }
 .dropdown-menu.hide{
     display: none;
