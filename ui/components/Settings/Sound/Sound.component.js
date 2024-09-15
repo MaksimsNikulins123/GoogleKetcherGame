@@ -1,14 +1,13 @@
-// import { getSoundStatus, subscribe, unsubscribe } from "../../../../core/state-manger.proxy.js";
-import { getSoundStatus, subscribe } from "../../../../core/state-manger.proxy.js";
+import { getSoundStatus, subscribe, unsubscribe } from "../../../../core/state-manger.proxy.js";
 import { CheckboxComponent } from "../../common/Checkbox/Checkbox.componenet.js";
-// import { SetTitle } from "../../common/SetTitle/SetTitle.component.js";
-import { SoundTitleComponent } from "./SoundTitleComponent/SoundTitleComponent.js";
+import { SetTitle } from "../../common/SetTitle/SetTitle.component.js";
 
 export function SoundComponent() {
 
     const localState = {
         prevSoundStatus: null,     
         cleanupFunctions: [],
+        title: null
     };
 
     //  console.log("CheckboxComponent created")
@@ -24,7 +23,7 @@ export function SoundComponent() {
 
     return {
         element,
-        cleanup: () => {},
+        cleanup: () => {unsubscribe(render(element, localState))},
     };
 }
 
@@ -44,9 +43,16 @@ async function render(element, localState) {
     
     localState.prevSoundStatus = soundStatusResponseBoolean;
 
+    localState.prevSoundStatus ?  localState.title = 'Sound on' :  localState.title = 'Sound off'
+
+    localState.cleanupFunctions.forEach(cleanupFunction => cleanupFunction());
+    localState.cleanupFunctions = [];
+    
     element.innerHTML = '';
 
-    const soundTitleComponent = SoundTitleComponent(soundStatusResponseBoolean);
+    const soundTitleComponent = SetTitle(localState.title);
+
+    // const soundTitleComponent = SoundTitleComponent(soundStatusResponseBoolean);
 
     const checkboxComponent = CheckboxComponent(soundStatusResponseBoolean)
 

@@ -37,6 +37,7 @@ export function AppComponent() {
     // console.log('App component created')
     const element = document.createElement('div');
     element.classList.add('app');
+    // element.classList.add('adaptive');
 
     const audioComponent = AudioComponent()
 

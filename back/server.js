@@ -5,6 +5,7 @@ import {
     getGooglePoints,
     getGooglePosition,
     getGridSize,
+    getGridSizeButtonValue,
     getPlayerPoints,
     getPlayerPosition,
     getSoundStatus,
@@ -75,6 +76,10 @@ app.get('/getPlayerPoints', async (req, res) => {
 app.get('/getGameStatus', async (req, res) => {
     const gameStatus = await getGameStatus();
     res.send({data: gameStatus});
+});
+app.get('/getGridSizeButtonValue', async (req, res) => {
+    const gridSizeButtonValue = await getGridSizeButtonValue();
+    res.send({data: gridSizeButtonValue});
 });
 app.get('/getGridSize', async (req, res) => {
     const gridSize = await getGridSize();

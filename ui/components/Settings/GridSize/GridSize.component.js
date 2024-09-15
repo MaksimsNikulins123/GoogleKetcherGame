@@ -1,9 +1,16 @@
+import { getGridSizeButtonValue } from '../../../../core/state-manger.proxy.js';
 import { SetTitle } from '../../common/SetTitle/SetTitle.component.js';
 import { DropDownListComponent } from './../../common/DropDownList/DropDownList.component.js';
 
 export function GridSizeComponent() {
      //  console.log("GridSizeComponent created")
-    const element = document.createElement('div');
+
+     const localState = {
+        prevSoundStatus: null,     
+        cleanupFunctions: [],
+        title: null
+    };
+     const element = document.createElement('div');
     element.classList.add('gridSizeBlock');
 
     render(element)
@@ -15,16 +22,17 @@ export function GridSizeComponent() {
 }
 
 async function render(element) {
+
+    const gridSizeButtonValuePromise = getGridSizeButtonValue()
+    const gridSizeButtonValue = await gridSizeButtonValuePromise;
+
+    const data = gridSizeButtonValue
+
     element.innerHTML = '';
 
     const title = 'Grid size';
 
     const gridSizeTitleComponent = SetTitle(title);
-
-    const data = {
-        title: 'Select grid size',
-        payload: ['5:5', '10:10', '15:15', '20:20', '25:25','30:30']
-    };
 
     const dropDownListComponent = DropDownListComponent(data);
 

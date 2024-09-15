@@ -71,6 +71,11 @@ export async function getGameStatus() {
     const responsePayload = await response.json();
     return responsePayload.data;
 }
+export async function getGridSizeButtonValue() {
+    const response = await fetch("http://localhost:3000/getGridSizeButtonValue");
+    const responsePayload = await response.json();
+    return responsePayload.data;
+}
 export async function getGridSize() {
     const response = await fetch("http://localhost:3000/getGridSize");
     const responsePayload = await response.json();

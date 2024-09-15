@@ -27,3 +27,8 @@ export const MOVING_DERECTIONS = {
     LEFT: 'left',
     RIGHT: 'right',
 }
+
+export const GRID_SIZE_BUTTON_VALUE = {
+    title: 'Select grid size',
+    payload: ['5:5', '10:10', '15:15', '20:20', '25:25', '30:30']
+}
