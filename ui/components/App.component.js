@@ -58,7 +58,7 @@ async function render(element, localState) {
     const gameStatusPromise = getGameStatus();
     const gameStatus = await gameStatusPromise;
 
-    console.log(gameStatus);
+    // console.log(gameStatus);
 
     if (localState.prevGameStatus === gameStatus) return;
 

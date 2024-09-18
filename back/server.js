@@ -13,6 +13,7 @@ import {
     getSoundStatus,
     movePlayer,
     playAgain,
+    setGridSize,
     start,
     subscribe,
     toggleSound,
@@ -62,6 +63,11 @@ app.get('/playAgain', async (req, res) => {
 app.get('/movePlayer', async (req, res) => {
     await movePlayer(req.query.playerNumber, req.query.direction);
     res.send(200);
+});
+app.get('/setGridSize', async (req, res) => {
+    await setGridSize(req.query.value);
+    res.send(200);
+    
 });
 app.get('/toggleSound', async (req, res) => {
     await toggleSound(req.query.status);

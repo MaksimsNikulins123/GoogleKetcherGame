@@ -1,11 +1,11 @@
-import { getSoundStatus, toggleSound } from "../../../../core/state-manger.proxy.js";
 
 
-export function CheckboxComponent(soundStatus) {
+export function CheckboxComponent(soundStatus, getValue) {
     // console.log("CheckboxComponent created")
 
     const localState = {
-        isChecked: soundStatus
+        isChecked: soundStatus,
+        getValue: getValue
     }
 
 
@@ -23,8 +23,8 @@ export function CheckboxComponent(soundStatus) {
 
 
 async function render(element, localState) {
-  
-    // console.log(`CheckboxComponent render: ${localState.renderCounter} `)
+    // console.log('CheckboxComponent render')
+
     element.innerHTML = '';
 
     const soundLabel = document.createElement('label');
@@ -38,7 +38,18 @@ async function render(element, localState) {
     soundInput.checked = localState.isChecked;
 
     soundInput.addEventListener('change',async (e) => {
-        toggleSound(e.target.checked);  
+        
+        const prevValue = localState.isChecked
+        const newValue = e.target.checked
+
+        // console.log(e.target.checked)
+        localState.isChecked = e.target.checked
+
+        if(prevValue !== newValue) {
+            localState.getValue(e.target.checked)
+        }
+
+        
     } );
 
     const soundSpan = document.createElement('span');
@@ -47,6 +58,5 @@ async function render(element, localState) {
     soundLabel.append(soundInput, soundSpan);
 
     element.append(soundLabel)
-    // console.log(checkbox.checked = true)
-    // console.log(element.getElement ('input'))
+  
 }

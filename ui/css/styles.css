@@ -28,25 +28,31 @@ body, html {
 
 .settings {
     display: flex;
+    align-items: center;
     gap: 10px;
     border: 1px solid #2980b9;
     background-color: #7c95a3;
     opacity: 0.9;
     border-radius: 25px;
     margin: 20px;
+    width: 1000px;
 }
 .settings div{
-    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     padding: 10px;
+    width: 100%;
+    flex-wrap: wrap;
 }
 
 .dropdown {
     display: flex;
     justify-content: center;
+    position: relative;
      }
 .dropdown-toggle {
-    position: relative;
-    
+    /* position: relative; */
     background-color: #3498db;
     color: white;
     padding: 10px 20px;
@@ -54,6 +60,7 @@ body, html {
     border: none;
     cursor: pointer;
     border-radius: 25px;
+    width: 100%;
   }
 
 .dropdown-toggle:hover {
@@ -62,22 +69,30 @@ body, html {
 .dropdown-menu  {
     display: block;
     position: absolute;
+    /* position: absolute; */
     background-color: #f9f9f9;
     color: black;
     /* width: 100%; */
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
     z-index: 1;
     border-radius: 4px;
-    margin-top: 50px;
-    padding: 0 20px;
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    top: 48px;
+ 
+    /* margin-top: 150px; */
+    /* margin-left: 50px; */
+    /* padding: 0 20px; */
   }
+
 .dropdown-menu.hide{
     display: none;
 }
 .dropdown-menu .dropdown-item {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
+    /* list-style-type: none; */
+    /* padding: 0;
+    margin: 0; */
     /* padding: 12px 16px; */
     cursor: pointer;
     
@@ -91,6 +106,9 @@ body, html {
     display: flex;
     justify-content: center;
     align-items:center;
+    margin: 0 20px;
+    padding: 0 20px;
+    
 }
 
 .soundSwitcher {

@@ -1,3 +1,4 @@
+import { EVENTS } from "./constans.js";
 
 // Create a new EventSource object, pointing to the SSE endpoint
 const eventSource = new EventSource('http://localhost:3000/events');
@@ -46,6 +47,9 @@ export async function playAgain() {
 }
 export async function movePlayer(playerNumber, direction) {
     fetch(`http://localhost:3000/movePlayer?playerNumber=${playerNumber}&direction=${direction}`);
+}
+export async function setGridSize(value) {
+    fetch(`http://localhost:3000/setGridSize?value=${value}`);
 }
 export async function toggleSound(status) {
     fetch(`http://localhost:3000/toggleSound?status=${status}`);
@@ -105,4 +109,10 @@ export async function getSoundStatus() {
     const response = await fetch("http://localhost:3000/getSoundStatus");
     const responsePayload = await response.json();
     return responsePayload.data;
+}
+
+//local changes
+
+export function setValue(name, payload) {
+_notifyObservers(name, payload);
 }

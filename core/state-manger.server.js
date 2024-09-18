@@ -1,4 +1,4 @@
-import { EVENTS, GAME_STATUSES, GRID_SIZE_BLOCK_VALUES, MOVING_DERECTIONS, POINST_TO_LOSE_BLOCK_VALUES, POINST_TO_WIN_BLOCK_VALUES, SOUND_STATUSES } from "./constans.js";
+import { EVENTS, GAME_STATUSES, GRID_SIZE_BLOCK_VALUES, MOVING_DERECTIONS, POINST_TO_LOSE_BLOCK_VALUES, POINST_TO_WIN_BLOCK_VALUES, SOUND_STATUS } from "./constans.js";
 
 const _state = {
     gameStatus: GAME_STATUSES.SETTINGS,
@@ -19,7 +19,7 @@ const _state = {
         },
         pointsToLose: 10,
         pointsToWin: 5,
-        sound: SOUND_STATUSES.OFF,
+        sound: SOUND_STATUS.OFF,
     },
     positions: {
         google: {
@@ -225,6 +225,16 @@ export async function movePlayer(playerNumber, direction) {
     _notifyObservers(EVENTS[`PLAYER${playerNumber}_MOVED`], {
         prevPosition: prevPosition,
         newPosition: newPosition,
+    });
+
+}
+export async function setGridSize(value) {
+    
+    if(_state.settings.gridSizeBlockValues.button.title === value) return;
+    
+    _state.settings.gridSizeBlockValues.button.title = value;
+    _notifyObservers(EVENTS.GRID_SIZE_CHANGED, {
+        value
     });
 
 }

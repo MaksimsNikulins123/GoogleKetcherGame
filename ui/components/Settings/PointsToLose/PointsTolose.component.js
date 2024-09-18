@@ -1,41 +1,63 @@
-import { getPointsToLoseBlockValues } from "../../../../core/state-manger.proxy.js";
-import { DropDownListComponent } from "../../common/DropDownList/DropDownList.component.js";
-import { SetTitle } from "../../common/SetTitle/SetTitle.component.js";
+import {
+    EVENTS
+} from "../../../../core/constans.js";
+import {
+    setValue,
+    subscribe
+} from "../../../../core/state-manger.proxy.js";
+import {
+    DropDownListComponent
+} from "../../common/DropDownList/DropDownList.component.js";
+import {
+    SetTitle
+} from "../../common/SetTitle/SetTitle.component.js";
 
-export function PointsToLoseComponent() {
-    //  console.log("PointsToLoseComponent created")
+export function PointsToLoseComponent(pointsToLoseBlockValues) {
+    // console.log("PointsToLoseComponent created")
+    const getValue = (e) => {
+        localState.buttonTitle = e.newValue;
+        // console.log(EVENTS.POINTS_TO_LOSE_CHANGED)
+        setValue(EVENTS.POINTS_TO_LOSE_CHANGED, e)
+    }
+
+    const localState = {
+        title: pointsToLoseBlockValues.title,
+        buttonTitle: pointsToLoseBlockValues.button.title,
+        list: pointsToLoseBlockValues.button.payload,
+        cleanupFunctions: [],
+        getValue
+
+    }
     const element = document.createElement('div');
     element.classList.add('pointsToLoseBlock');
 
-    render(element)
+    subscribe((e) => {
+        if(e.name === EVENTS.POINTS_TO_LOSE_CHANGED) {
+            render(element, localState)
+        }
+        
+    })
+
+    render(element, localState)
 
     return {
         element,
-        cleanup: () => { },
+        cleanup: () => {},
     };
 }
 
-async function render(element) {
-    const getPointsToLoseBlockValuesPromise = getPointsToLoseBlockValues()
-    const pointsToLoseBlockValues = await getPointsToLoseBlockValuesPromise;
+async function render(element, localState) {
 
-    const title = pointsToLoseBlockValues.title
-    const data = pointsToLoseBlockValues.button
+    // console.log("PointsToLoseComponent render")
 
     element.innerHTML = '';
 
-    // const title = 'Points to lose';
 
-    // const data = {
-    //     title: 'Select points to lose',
-    //     payload: [10, 20, 30, 40, 50]
-    // }
+    const pointsToWinTitleComponent = SetTitle(localState.title);
 
-    const pointsToWinTitleComponent = SetTitle(title);
-
-    const dropDownListComponent = DropDownListComponent(data);
+    const dropDownListComponent = DropDownListComponent(localState.buttonTitle, localState.list, localState.getValue);
 
     element.append(pointsToWinTitleComponent.element, dropDownListComponent.element);
-    // console.log("PointsToLoseComponent render")
+
 
 }

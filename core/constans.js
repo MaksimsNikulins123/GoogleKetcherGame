@@ -5,10 +5,7 @@ export const GAME_STATUSES = {
     LOSE: 'lose',
 }
 
-export const SOUND_STATUSES = {
-    OFF: 'false',
-    ON: 'true',
-}
+
 
 export const EVENTS = {
     GOOGLE_JUMPED: 'GOOGLE_JUMPED',
@@ -18,6 +15,9 @@ export const EVENTS = {
     SCORES_CHANGED: 'SCORES_CHENGED',
     GOOGLE_COUGHT: 'GOOGLE_COUGHT',
     GOOGLE_RUN_AWAY: 'GOOGLE_RUN_AWAY',
+    GRID_SIZE_CHANGED: 'GRID_SIZE_CHANGED',
+    POINTS_TO_WIN_CHANGED: 'POINTS_TO_WIN_CHANGED',
+    POINTS_TO_LOSE_CHANGED: 'POINTS_TO_LOSE_CHANGED',
     SOUND_STATUS_CHANGED: 'SOUND_STATUS_CHANGED',
 }
 
@@ -31,6 +31,7 @@ export const MOVING_DERECTIONS = {
 export const GRID_SIZE_BLOCK_VALUES = {
     title: 'Grid size',
     button: {
+        active: 'true',
         title: 'Select grid size',
         payload: ['5:5', '10:10', '15:15', '20:20', '25:25', '30:30']
     }
@@ -39,6 +40,7 @@ export const GRID_SIZE_BLOCK_VALUES = {
 export const POINST_TO_WIN_BLOCK_VALUES = {
     title: 'Points to win',
     button: {
+        active: 'true',
         title: 'Select points to win',
         payload: [10, 20, 30, 40, 50]
     }
@@ -47,8 +49,12 @@ export const POINST_TO_WIN_BLOCK_VALUES = {
 export const POINST_TO_LOSE_BLOCK_VALUES = {
     title: 'Points to lose',
     button: {
+        active: 'true',
         title: 'Select points to lose',
         payload: [10, 20, 30, 40, 50]
     }
-   
+}
+export const SOUND_STATUS = {
+    OFF: 'false',
+    ON: 'true',
 }

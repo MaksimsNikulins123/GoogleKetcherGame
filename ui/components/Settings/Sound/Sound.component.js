@@ -1,21 +1,33 @@
-import { getSoundStatus, subscribe, unsubscribe } from "../../../../core/state-manger.proxy.js";
+import { EVENTS } from "../../../../core/constans.js";
+import { setValue, subscribe,} from "../../../../core/state-manger.proxy.js";
 import { CheckboxComponent } from "../../common/Checkbox/Checkbox.componenet.js";
 import { SetTitle } from "../../common/SetTitle/SetTitle.component.js";
 
-export function SoundComponent() {
+export function SoundComponent(soundStatus) {
+    // console.log("Sound Component created")
+
+    const getValue = (e) => {
+        localState.soundStatus = e;
+        // console.log(EVENTS.SOUND_STATUS_CHANGED)
+        setValue(EVENTS.SOUND_STATUS_CHANGED, e)
+        }
 
     const localState = {
-        prevSoundStatus: null,     
+        soundStatus: soundStatus,   
         cleanupFunctions: [],
-        title: null
+        title: null,
+        getValue
     };
 
-    //  console.log("CheckboxComponent created")
+    
     const element = document.createElement('div');
     element.classList.add('SoundBlock');
 
-    subscribe(() => {
-        render(element, localState);
+    subscribe((e) => {
+        if(e.name === EVENTS.SOUND_STATUS_CHANGED) {
+            render(element, localState);
+        }
+        
     })
     
     render(element, localState)
@@ -23,43 +35,25 @@ export function SoundComponent() {
 
     return {
         element,
-        cleanup: () => {unsubscribe(render(element, localState))},
+        cleanup: () => {},
     };
 }
 
 async function render(element, localState) {
-
-    const soundStatusPromise = getSoundStatus();
-    const soundStatus = await soundStatusPromise;
     
-    function stringToBoolean(str) {
-        if (typeof str === "string" && str === 'true') {
-          return true;
-        }
-        return false;
-      }
-
-    const soundStatusResponseBoolean = stringToBoolean(soundStatus)
+    // console.log("Sound Component render")
     
-    localState.prevSoundStatus = soundStatusResponseBoolean;
+    localState.soundStatus ?  localState.title = 'Sound on' :  localState.title = 'Sound off'
 
-    localState.prevSoundStatus ?  localState.title = 'Sound on' :  localState.title = 'Sound off'
-
-    localState.cleanupFunctions.forEach(cleanupFunction => cleanupFunction());
-    localState.cleanupFunctions = [];
     
     element.innerHTML = '';
 
     const soundTitleComponent = SetTitle(localState.title);
 
-    // const soundTitleComponent = SoundTitleComponent(soundStatusResponseBoolean);
-
-    const checkboxComponent = CheckboxComponent(soundStatusResponseBoolean)
-
-    // console.log(checkboxComponent)
+    const checkboxComponent = CheckboxComponent(localState.soundStatus, localState.getValue)
     
     element.append(soundTitleComponent.element, checkboxComponent.element
     );
-    // console.log("CheckboxComponent render")
+   
     
 }
