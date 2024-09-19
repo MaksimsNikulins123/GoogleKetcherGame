@@ -23,6 +23,18 @@ export function SettingsComponent() {
     const element = document.createElement('div');
     element.classList.add('settings');
 
+    // window.onresize = function () {
+    //     // const elementBurger = document.createElement('div');
+
+    //     if (window.innerWidth <= 800) {
+    //         // elementBurger.classList.add('burger')
+    //         // elementBurger.append(element.element)
+    //         element.classList.add('burger')
+    //     }
+    //     else  element.classList.remove('burger')
+    //         // else elementBurger.classList.add('burger')  
+    // }
+
     render(element)
 
     return {
