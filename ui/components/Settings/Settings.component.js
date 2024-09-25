@@ -4,6 +4,7 @@ import {
     getPointsToWinBlockValues,
     getSoundStatus
 } from "../../../core/state-manger.proxy.js";
+import { BurgerComponent } from "../common/Burger/Burger.component.js";
 import {
     GridSizeComponent
 } from "./GridSize/GridSize.component.js";
@@ -23,17 +24,17 @@ export function SettingsComponent() {
     const element = document.createElement('div');
     element.classList.add('settings');
 
-    // window.onresize = function () {
-    //     // const elementBurger = document.createElement('div');
+    window.onresize = function () {
+        // const elementBurger = document.createElement('div');
 
-    //     if (window.innerWidth <= 800) {
-    //         // elementBurger.classList.add('burger')
-    //         // elementBurger.append(element.element)
-    //         element.classList.add('burger')
-    //     }
-    //     else  element.classList.remove('burger')
-    //         // else elementBurger.classList.add('burger')  
-    // }
+        if (window.innerWidth >= 1000) {
+            // elementBurger.classList.add('burger')
+            // elementBurger.append(element.element)
+            element.classList.remove('active')
+        }
+        // else  element.classList.remove('burger')
+            // else elementBurger.classList.add('burger')  
+    }
 
     render(element)
 
@@ -67,9 +68,11 @@ async function render(element) {
 
     const soundStatusResponseBoolean = stringToBoolean(soundStatus)
 
-    
+    const settingElement = element
     
     element.innerHTML = '';
+
+    const burgerComponent = BurgerComponent(settingElement);
 
     const gridSizeComponent = GridSizeComponent(gridSizeBlockValues);
 
@@ -80,6 +83,7 @@ async function render(element) {
     const soundComponent = SoundComponent(soundStatusResponseBoolean);
 
     element.append(
+        burgerComponent.element,
         gridSizeComponent.element,
         pointsToWinComponent.element,
         pointsToLoseComponent.element,

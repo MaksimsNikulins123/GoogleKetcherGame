@@ -1,5 +1,6 @@
-export function BurgerComponent() {
+export function BurgerComponent(elements) {
     console.log("Burger Component created")
+    console.log(elements)
 
     // const localState = {
     //     isChecked: soundStatus,
@@ -7,14 +8,14 @@ export function BurgerComponent() {
     // }
 
 
-    const element = document.createElement('div');
-    element.classList.add('burger');
+    const element = document.createElement('button');
+    element.classList.add('burger-btn');
 
     element.addEventListener('click', () => {
-        if (element.classList.contains('active') == true) {
-            element.classList.remove('active');
+        if (elements.classList.contains('active') == true) {
+            elements.classList.remove('active');
         } else {
-            element.classList.add('active');
+            elements.classList.add('active');
         }
         
        
@@ -36,14 +37,11 @@ async function render(element) {
 
     element.innerHTML = '';
 
-    const burgerBox = document.createElement('div')
-    burgerBox.classList.add('burger-box')
-    
-    const burgerInner = document.createElement('div');
-    burgerInner.classList.add('burger-inner');
+    for (let index = 0; index < 3; index++) {
 
-    burgerBox.append(burgerInner);
-
-    element.append(burgerBox)
+        const burgerSpan = document.createElement('span')
+        element.append(burgerSpan);
+        
+    }
   
 }

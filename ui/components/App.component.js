@@ -24,9 +24,6 @@ import {
     StartComponent
 } from "./Start/Start.component.js";
 import { 
-    BurgerComponent 
-} from "./common/Burger/Burger.component.js";
-import { 
     WinComponent 
 } from "./Win/Win.component.js";
 
@@ -77,12 +74,11 @@ async function render(element, localState) {
 
     switch (gameStatus) {
         case GAME_STATUSES.SETTINGS: {
-            const burgerComponent = BurgerComponent();
             const settingsComponent = SettingsComponent();
             localState.cleanupFunctions.push(settingsComponent.cleanup)
             const startComponent = StartComponent();
             // localState.cleanupFunctions.push(startComponent.cleanup)
-            element.append(burgerComponent.element, settingsComponent.element, startComponent.element);
+            element.append(settingsComponent.element, startComponent.element);
             break;
         }
         case GAME_STATUSES.IN_PROGRESS:
