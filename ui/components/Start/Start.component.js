@@ -17,6 +17,7 @@ export function StartComponent() {
 async function render(element) {
     // console.log("StartComponent render")
     const button = document.createElement('button');
+    button.classList.add('start-btn')
     button.append('START GAME');
     button.addEventListener('click', () => {
         start();
