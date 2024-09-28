@@ -1,6 +1,6 @@
 export function BurgerComponent(elements) {
-    console.log("Burger Component created")
-    console.log(elements)
+    // console.log("Burger Component created")
+    // console.log(elements)
 
     // const localState = {
     //     isChecked: soundStatus,
@@ -11,11 +11,16 @@ export function BurgerComponent(elements) {
     const element = document.createElement('button');
     element.classList.add('burger-btn');
 
+    const startButton = document.getElementsByClassName('start-btn')
+
     element.addEventListener('click', () => {
         if (elements.classList.contains('active') == true) {
             elements.classList.remove('active');
+            startButton[0].classList.remove('hide');
         } else {
             elements.classList.add('active');
+            startButton[0].classList.add('hide');
+            
         }
         
        
@@ -33,7 +38,7 @@ export function BurgerComponent(elements) {
 
 
 async function render(element) {
-    console.log('Burger Component render')
+    // console.log('Burger Component render')
 
     element.innerHTML = '';
 

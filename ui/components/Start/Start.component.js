@@ -1,6 +1,7 @@
 import {
     start
 } from "../../../core/state-manger.proxy.js";
+import { SettingsComponent } from "../Settings/Settings.component.js";
 
 export function StartComponent() {
     // console.log("StartComponent created")
@@ -19,7 +20,11 @@ async function render(element) {
     const button = document.createElement('button');
     button.classList.add('start-btn')
     button.append('START GAME');
+
+    const settingsComponent = SettingsComponent();
+
     button.addEventListener('click', () => {
+        console.log(settingsComponent)
         start();
     })
     element.append(button);

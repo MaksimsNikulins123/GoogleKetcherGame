@@ -28,13 +28,14 @@ import {
 } from "./Win/Win.component.js";
 
 export function AppComponent() {
-
+  console.log('App component created')
+  
     const localState = {
         prevGameStatus: null,
         cleanupFunctions: [],
     };
 
-    // console.log('App component created')
+  
     const element = document.createElement('div');
     element.classList.add('app');
     // element.classList.add('adaptive');
@@ -54,6 +55,7 @@ export function AppComponent() {
 }
 
 async function render(element, localState) {
+    console.log('App component render');
 
     const gameStatusPromise = getGameStatus();
     const gameStatus = await gameStatusPromise;
@@ -64,7 +66,7 @@ async function render(element, localState) {
 
     localState.prevGameStatus = gameStatus;
 
-    // console.log('App component render');
+    
     // console.log(gameStatus);
 
     localState.cleanupFunctions.forEach(cleanupFunction => cleanupFunction());

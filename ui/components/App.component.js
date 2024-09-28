@@ -29,12 +29,14 @@ import {
 
 export function AppComponent() {
 
+    console.log('App component created')
+
     const localState = {
         prevGameStatus: null,
         cleanupFunctions: [],
     };
 
-    // console.log('App component created')
+    
     const element = document.createElement('div');
     element.classList.add('app');
     // element.classList.add('adaptive');
@@ -55,6 +57,8 @@ export function AppComponent() {
 
 async function render(element, localState) {
 
+    console.log('App component render');
+    
     const gameStatusPromise = getGameStatus();
     const gameStatus = await gameStatusPromise;
 
@@ -64,7 +68,7 @@ async function render(element, localState) {
 
     localState.prevGameStatus = gameStatus;
 
-    // console.log('App component render');
+  
     // console.log(gameStatus);
 
     localState.cleanupFunctions.forEach(cleanupFunction => cleanupFunction());
@@ -74,7 +78,7 @@ async function render(element, localState) {
 
     switch (gameStatus) {
         case GAME_STATUSES.SETTINGS: {
-            const settingsComponent = SettingsComponent();
+            const settingsComponent = SettingsComponent(gameStatus);
             localState.cleanupFunctions.push(settingsComponent.cleanup)
             const startComponent = StartComponent();
             // localState.cleanupFunctions.push(startComponent.cleanup)
@@ -82,7 +86,7 @@ async function render(element, localState) {
             break;
         }
         case GAME_STATUSES.IN_PROGRESS:
-            const settingsComponent = SettingsComponent();
+            const settingsComponent = SettingsComponent(gameStatus);
             localState.cleanupFunctions.push(settingsComponent.cleanup)
             const resultPanelComponent = ResultPanelComponent();
             localState.cleanupFunctions.push(resultPanelComponent.cleanup)

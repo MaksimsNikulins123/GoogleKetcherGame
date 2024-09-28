@@ -1,8 +1,10 @@
+import { GAME_STATUSES } from "../../../core/constans.js";
 import {
     getGridSizeBlockValues,
     getPointsToLoseBlockValues,
     getPointsToWinBlockValues,
-    getSoundStatus
+    getSoundStatus,
+    // subscribe
 } from "../../../core/state-manger.proxy.js";
 import { BurgerComponent } from "../common/Burger/Burger.component.js";
 import {
@@ -20,23 +22,31 @@ import {
 
 
 export function SettingsComponent() {
-    // console.log("SettingsComponent created")
+
+    console.log("SettingsComponent created")
+
+    const localState = {
+        gridSizeBlockValues: null,
+        pointsToWinBlockValues: null,
+        pointsToLoseBlockValues: null, 
+        soundStatus: null
+    }
+
+    
     const element = document.createElement('div');
     element.classList.add('settings');
 
     window.onresize = function () {
-        // const elementBurger = document.createElement('div');
-
-        if (window.innerWidth >= 1000) {
-            // elementBurger.classList.add('burger')
-            // elementBurger.append(element.element)
+        if (window.innerWidth >= 1000) {  
             element.classList.remove('active')
         }
-        // else  element.classList.remove('burger')
-            // else elementBurger.classList.add('burger')  
     }
 
-    render(element)
+    // subscribe(() => {
+    //     render(element, localState);
+    // })
+
+    render(element, localState)
 
     return {
         element,
@@ -45,7 +55,7 @@ export function SettingsComponent() {
 }
 
 async function render(element) {
-    // console.log('Setting component render')
+    console.log('Setting component render')
 
     const gridSizeBlockValuesPromise = getGridSizeBlockValues()
     const gridSizeBlockValues = await gridSizeBlockValuesPromise;
