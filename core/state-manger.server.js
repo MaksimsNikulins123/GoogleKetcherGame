@@ -127,7 +127,7 @@ function _catchGoogle(playerNumber) {
 
     if(_state.points.players[playerIndex] === _state.settings.pointsToWin) {
         _state.gameStatus = GAME_STATUSES.WIN;
-        _notifyObservers(EVENTS.STATUS_CHANGED);
+        _notifyObservers(EVENTS.GAME_STATUS_CHANGED);
         clearInterval(googleJumpInterval);
     } else {
         const prevPosition = _state.positions.google;
@@ -173,17 +173,17 @@ export async function start() {
         if (_state.points.google === _state.settings.pointsToLose) {
             clearInterval(googleJumpInterval);
             _state.gameStatus = GAME_STATUSES.LOSE;
-            _notifyObservers(EVENTS.STATUS_CHANGED);
+            _notifyObservers(EVENTS.GAME_STATUS_CHANGED);
         }
     }, _state.settings.googleJumpInterval);
     //status changed
     _state.gameStatus = GAME_STATUSES.IN_PROGRESS;
-    _notifyObservers(EVENTS.STATUS_CHANGED);
+    _notifyObservers(EVENTS.GAME_STATUS_CHANGED);
 }
 export async function playAgain() {
     //status changed
     _state.gameStatus = GAME_STATUSES.SETTINGS;
-    _notifyObservers(EVENTS.STATUS_CHANGED);
+    _notifyObservers(EVENTS.GAME_STATUS_CHANGED);
 }
 export async function movePlayer(playerNumber, direction) {
     if(_state.gameStatus !== GAME_STATUSES.IN_PROGRESS) {

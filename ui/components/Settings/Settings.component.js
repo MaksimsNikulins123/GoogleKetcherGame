@@ -35,13 +35,20 @@ export function SettingsComponent() {
     
     const element = document.createElement('div');
     element.classList.add('settings');
+    element.id = 'settings';
 
     window.onresize = function () {
         if (window.innerWidth >= 1000) {  
             element.classList.remove('active')
         }
     }
-
+    // subscribe((e) => {
+    //     console.log(e)
+    //     if(e.name === EVENTS.GAME_STATUS_CHANGED) {
+    //         render(element, localState);
+    //     }
+        
+    // })
     // subscribe(() => {
     //     render(element, localState);
     // })
@@ -78,11 +85,11 @@ async function render(element) {
 
     const soundStatusResponseBoolean = stringToBoolean(soundStatus)
 
-    const settingElement = element
+    // const settingElement = element
     
     element.innerHTML = '';
 
-    const burgerComponent = BurgerComponent(settingElement);
+    const burgerComponent = BurgerComponent();
 
     const gridSizeComponent = GridSizeComponent(gridSizeBlockValues);
 

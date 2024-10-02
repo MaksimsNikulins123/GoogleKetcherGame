@@ -19,12 +19,13 @@ async function render(element) {
     // console.log("StartComponent render")
     const button = document.createElement('button');
     button.classList.add('start-btn')
+    button.id = 'start-btn';
     button.append('START GAME');
 
-    const settingsComponent = SettingsComponent();
+    // const settingsComponent = SettingsComponent();
 
     button.addEventListener('click', () => {
-        console.log(settingsComponent)
+        // console.log(settingsComponent)
         start();
     })
     element.append(button);

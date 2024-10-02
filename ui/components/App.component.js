@@ -1,4 +1,5 @@
 import {
+    EVENTS,
     GAME_STATUSES
 } from "../../core/constans.js";
 import {
@@ -44,8 +45,12 @@ export function AppComponent() {
     const audioComponent = AudioComponent()
 
 
-    subscribe(() => {
-        render(element, localState);
+    subscribe((e) => {
+        console.log(e)
+        if(e.name === EVENTS.GAME_STATUS_CHANGED) {
+            render(element, localState);
+        }
+        
     })
 
     render(element, localState)

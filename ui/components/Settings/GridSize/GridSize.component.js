@@ -4,7 +4,7 @@ import { SetTitle } from '../../common/SetTitle/SetTitle.component.js';
 import { DropDownListComponent } from './../../common/DropDownList/DropDownList.component.js';
 
 export function GridSizeComponent(gridSizeBlockValues) {
-    //  console.log("GridSizeComponent created")
+     console.log("GridSizeComponent created")
 
     const getValue = (e) => {
         localState.buttonTitle = e.newValue;
@@ -44,7 +44,7 @@ subscribe((e) => {
 }
 
 async function render(element, localState) {
-    // console.log('Grid size component render')
+    console.log('Grid size component render')
 
     element.innerHTML = '';
 

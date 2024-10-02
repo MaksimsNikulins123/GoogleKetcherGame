@@ -1,4 +1,4 @@
-export function BurgerComponent(elements) {
+export function BurgerComponent() {
     // console.log("Burger Component created")
     // console.log(elements)
 
@@ -11,15 +11,16 @@ export function BurgerComponent(elements) {
     const element = document.createElement('button');
     element.classList.add('burger-btn');
 
-    const startButton = document.getElementsByClassName('start-btn')
+    const settingsElement = document.getElementById('settings');
+    const startButtonElement = document.getElementById('start-btn')
 
     element.addEventListener('click', () => {
-        if (elements.classList.contains('active') == true) {
-            elements.classList.remove('active');
-            startButton[0].classList.remove('hide');
+        if (settingsElement.classList.contains('active') == true) {
+            settingsElement.classList.remove('active');
+            startButtonElement.classList.remove('hide');
         } else {
-            elements.classList.add('active');
-            startButton[0].classList.add('hide');
+            settingsElement.classList.add('active');
+            startButtonElement.classList.add('hide');
             
         }
         
