@@ -30,51 +30,48 @@ import {
 
 export function AppComponent() {
 
-    console.log('App component created')
+    // console.log('App component created')
 
     const localState = {
         prevGameStatus: null,
         cleanupFunctions: [],
     };
 
+    const saveSettings = () => {
+        console.log('save settings')
+    }
+
     
     const element = document.createElement('div');
     element.classList.add('app');
-    // element.classList.add('adaptive');
 
     const audioComponent = AudioComponent()
 
 
     subscribe((e) => {
-        console.log(e)
         if(e.name === EVENTS.GAME_STATUS_CHANGED) {
-            render(element, localState);
+            render(element, localState, saveSettings);
         }
         
     })
 
-    render(element, localState)
+    render(element, localState, saveSettings)
 
     return {
         element
     };
 }
 
-async function render(element, localState) {
+async function render(element, localState, saveSettings) {
 
-    console.log('App component render');
+    // console.log('App component render');
     
     const gameStatusPromise = getGameStatus();
     const gameStatus = await gameStatusPromise;
 
-    // console.log(gameStatus);
-
     if (localState.prevGameStatus === gameStatus) return;
 
     localState.prevGameStatus = gameStatus;
-
-  
-    // console.log(gameStatus);
 
     localState.cleanupFunctions.forEach(cleanupFunction => cleanupFunction());
     localState.cleanupFunctions = [];

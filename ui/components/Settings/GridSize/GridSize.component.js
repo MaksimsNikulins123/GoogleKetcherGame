@@ -1,14 +1,14 @@
 import { EVENTS } from '../../../../core/constans.js';
-import { setValue, subscribe, } from '../../../../core/state-manger.proxy.js';
+import { saveValue, setValue, subscribe, } from '../../../../core/state-manger.proxy.js';
 import { SetTitle } from '../../common/SetTitle/SetTitle.component.js';
 import { DropDownListComponent } from './../../common/DropDownList/DropDownList.component.js';
 
 export function GridSizeComponent(gridSizeBlockValues) {
-     console.log("GridSizeComponent created")
+    //  console.log("GridSizeComponent created")
 
     const getValue = (e) => {
         localState.buttonTitle = e.newValue;
-        // console.log(EVENTS.GRID_SIZE_CHANGED)
+        saveValue({name: EVENTS.SAVE_GRID_SIZE_SETTINGS_VALUE, payload: localState.buttonTitle})
         setValue(EVENTS.GRID_SIZE_CHANGED, e)
         }
 
@@ -44,7 +44,7 @@ subscribe((e) => {
 }
 
 async function render(element, localState) {
-    console.log('Grid size component render')
+    // console.log('Grid size component render')
 
     element.innerHTML = '';
 

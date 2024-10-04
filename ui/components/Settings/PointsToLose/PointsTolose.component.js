@@ -1,7 +1,9 @@
 import {
-    EVENTS
+    EVENTS,
+    POINST_TO_LOSE_BLOCK_VALUES
 } from "../../../../core/constans.js";
 import {
+    saveValue,
     setValue,
     subscribe
 } from "../../../../core/state-manger.proxy.js";
@@ -14,20 +16,22 @@ import {
 
 export function PointsToLoseComponent(pointsToLoseBlockValues) {
     // console.log("PointsToLoseComponent created")
+  
+   
+
     const getValue = (e) => {
         localState.buttonTitle = e.newValue;
-        // console.log(EVENTS.POINTS_TO_LOSE_CHANGED)
+        saveValue({name: EVENTS.SAVE_POINTS_TO_LOSE_SETTINGS_VALUE, payload: localState.buttonTitle})
         setValue(EVENTS.POINTS_TO_LOSE_CHANGED, e)
     }
-
     const localState = {
         title: pointsToLoseBlockValues.title,
         buttonTitle: pointsToLoseBlockValues.button.title,
         list: pointsToLoseBlockValues.button.payload,
         cleanupFunctions: [],
         getValue
-
     }
+    
     const element = document.createElement('div');
     element.classList.add('pointsToLoseBlock');
 

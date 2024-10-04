@@ -1,5 +1,5 @@
 import { EVENTS } from "../../../../core/constans.js";
-import { setValue, subscribe,} from "../../../../core/state-manger.proxy.js";
+import { saveValue, setValue, subscribe,} from "../../../../core/state-manger.proxy.js";
 import { CheckboxComponent } from "../../common/Checkbox/Checkbox.componenet.js";
 import { SetTitle } from "../../common/SetTitle/SetTitle.component.js";
 
@@ -8,7 +8,7 @@ export function SoundComponent(soundStatus) {
 
     const getValue = (e) => {
         localState.soundStatus = e;
-        // console.log(EVENTS.SOUND_STATUS_CHANGED)
+        saveValue({name: EVENTS.SAVE_SOUND_STATUS, payload: localState.soundStatus})
         setValue(EVENTS.SOUND_STATUS_CHANGED, e)
         }
 

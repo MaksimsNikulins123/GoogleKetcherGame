@@ -9,7 +9,11 @@ eventSource.addEventListener('message', (eventSourseEvent) => {
 
     _notifyObservers(event.name, event.payload);
 })
+//LocalState
 
+const localState = {
+    settingsValues: []
+}
 //OBSERVER
 let _observers = [];
 export function subscribe(observer) {
@@ -51,9 +55,9 @@ export async function movePlayer(playerNumber, direction) {
 export async function setGridSize(value) {
     fetch(`http://localhost:3000/setGridSize?value=${value}`);
 }
-export async function toggleSound(status) {
-    fetch(`http://localhost:3000/toggleSound?status=${status}`);
-}
+// export async function toggleSound(status) {
+//     fetch(`http://localhost:3000/toggleSound?status=${status}`);
+// }
 //GETTERS/SELECTORS/QUERY
 export async function getGooglePoints() {
     const response = await fetch("http://localhost:3000/getGooglePoints");
@@ -114,5 +118,23 @@ export async function getSoundStatus() {
 //local changes
 
 export function setValue(name, payload) {
+    
 _notifyObservers(name, payload);
 }
+
+export async function saveSettings() {
+    if(localState.settingsValues.length > 0) {
+        const stringifiedSettingsValues = JSON.stringify(localState.settingsValues)
+        await fetch(`http://localhost:3000/saveSettings?newSettings=${stringifiedSettingsValues}`)
+    } else return;
+}
+export function  saveValue(newValue) {
+    if(localState.settingsValues.findIndex(object => object.name === newValue.name) < 0) {
+        localState.settingsValues.push(newValue)
+    } else {
+        const index = localState.settingsValues.findIndex(object => object.name === newValue.name)
+        localState.settingsValues[index] = newValue
+    }
+   
+}
+

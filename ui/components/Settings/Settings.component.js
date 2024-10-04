@@ -1,10 +1,8 @@
-import { GAME_STATUSES } from "../../../core/constans.js";
 import {
     getGridSizeBlockValues,
     getPointsToLoseBlockValues,
     getPointsToWinBlockValues,
     getSoundStatus,
-    // subscribe
 } from "../../../core/state-manger.proxy.js";
 import { BurgerComponent } from "../common/Burger/Burger.component.js";
 import {
@@ -23,7 +21,7 @@ import {
 
 export function SettingsComponent() {
 
-    console.log("SettingsComponent created")
+    // console.log("SettingsComponent created")
 
     const localState = {
         gridSizeBlockValues: null,
@@ -37,21 +35,15 @@ export function SettingsComponent() {
     element.classList.add('settings');
     element.id = 'settings';
 
+    
+
     window.onresize = function () {
+        const startButtonElement = document.getElementById('start-btn')
         if (window.innerWidth >= 1000) {  
             element.classList.remove('active')
+            startButtonElement.classList.remove('hide')
         }
     }
-    // subscribe((e) => {
-    //     console.log(e)
-    //     if(e.name === EVENTS.GAME_STATUS_CHANGED) {
-    //         render(element, localState);
-    //     }
-        
-    // })
-    // subscribe(() => {
-    //     render(element, localState);
-    // })
 
     render(element, localState)
 
@@ -62,7 +54,7 @@ export function SettingsComponent() {
 }
 
 async function render(element) {
-    console.log('Setting component render')
+    // console.log('Setting component render')
 
     const gridSizeBlockValuesPromise = getGridSizeBlockValues()
     const gridSizeBlockValues = await gridSizeBlockValuesPromise;
@@ -84,8 +76,6 @@ async function render(element) {
     }
 
     const soundStatusResponseBoolean = stringToBoolean(soundStatus)
-
-    // const settingElement = element
     
     element.innerHTML = '';
 

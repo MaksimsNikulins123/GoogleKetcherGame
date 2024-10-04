@@ -238,13 +238,39 @@ export async function setGridSize(value) {
     });
 
 }
-export async function toggleSound(status) {
+// export async function toggleSound(status) {
     
-    if(_state.settings.sound === status) return;
+//     if(_state.settings.sound === status) return;
     
-    _state.settings.sound = status;
-    _notifyObservers(EVENTS.SOUND_STATUS_CHANGED, {
-        status
+//     _state.settings.sound = status;
+//     _notifyObservers(EVENTS.SOUND_STATUS_CHANGED, {
+//         status
+//     } );
+
+// }
+export async function saveSettings(newSettings) {
+    
+    const parsedNewSettings = JSON.parse(newSettings);
+    // console.log(JSON.parse(newSettings));
+    // if(_state.settings.sound === status) return;
+    for (let index = 0; index < parsedNewSettings.length; index++) {
+        if(parsedNewSettings[index].name == EVENTS.SAVE_GRID_SIZE_SETTINGS_VALUE) {
+            _state.settings.gridSizeBlockValues.button.title = parsedNewSettings[index].payload
+        }
+        if(parsedNewSettings[index].name == EVENTS.SAVE_POINTS_TO_WIN_SETTINGS_VALUE) {
+            _state.settings.pointsToWinBlockValues.button.title = parsedNewSettings[index].payload
+        }
+        if(parsedNewSettings[index].name == EVENTS.SAVE_POINTS_TO_LOSE_SETTINGS_VALUE) {
+            _state.settings.pointsToLoseBlockValues.button.title = parsedNewSettings[index].payload
+        }
+        if(parsedNewSettings[index].name == EVENTS.SAVE_SOUND_STATUS) {
+            _state.settings.sound = JSON.stringify(parsedNewSettings[index].payload)
+        }
+        
+    }
+    // _state.settings.sound = status;
+    _notifyObservers(EVENTS.NEW_SETTINGS_VALUE_SAVED, {
+        newSettings
     } );
 
 }

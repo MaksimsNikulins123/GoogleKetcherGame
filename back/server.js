@@ -13,10 +13,11 @@ import {
     getSoundStatus,
     movePlayer,
     playAgain,
+    saveSettings,
     setGridSize,
     start,
     subscribe,
-    toggleSound,
+    // toggleSound,
     unsubscribe
 } from '../core/state-manger.server.js';
 
@@ -69,11 +70,19 @@ app.get('/setGridSize', async (req, res) => {
     res.send(200);
     
 });
-app.get('/toggleSound', async (req, res) => {
-    await toggleSound(req.query.status);
+// app.get('/toggleSound', async (req, res) => {
+//     await toggleSound(req.query.status);
+//     res.send(200);
+    
+// });
+app.get('/saveSettings', async (req, res) => {
+    if(req.query.newSettings == []) return;
+    await saveSettings(req.query.newSettings);
+    // console.log(req.query.newSettings)
     res.send(200);
     
 });
+
 app.get('/getGooglePoints', async (req, res) => {
     const googlePoints = await getGooglePoints();
     res.send({data: googlePoints});
