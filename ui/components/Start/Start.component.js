@@ -7,7 +7,7 @@ import {
 import { EVENTS } from '../../../core/constans.js';
 
 export function StartComponent(startButtonStatus) {
-    // console.log('StartButton component created')
+    console.log('StartButton component created')
     // console.log(typeof(startButtonStatus))
 
     const localState = {
@@ -35,7 +35,7 @@ export function StartComponent(startButtonStatus) {
 }
 
 async function render(element, localState) {
-    // console.log("StartComponent render")
+    console.log("StartComponent render")
 
     element.innerHTML = '';
     const button = document.createElement('button');
