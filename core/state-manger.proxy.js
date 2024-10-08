@@ -22,7 +22,6 @@ export function subscribe(observer) {
 export function unsubscribe(observer) {
     _observers = _observers.filter(item => item !== observer)
 }
-
 function _notifyObservers(name, payload = {}) {
     const event = {
         name,
@@ -38,12 +37,11 @@ function _notifyObservers(name, payload = {}) {
     })
 }
 
-
-
 //INTERFACE/ADAPTER
 
 //COMMANDS/SETTERS
 export async function start() {
+    saveSettings();
     fetch("http://localhost:3000/start");
 }
 export async function playAgain() {
@@ -52,12 +50,7 @@ export async function playAgain() {
 export async function movePlayer(playerNumber, direction) {
     fetch(`http://localhost:3000/movePlayer?playerNumber=${playerNumber}&direction=${direction}`);
 }
-export async function setGridSize(value) {
-    fetch(`http://localhost:3000/setGridSize?value=${value}`);
-}
-// export async function toggleSound(status) {
-//     fetch(`http://localhost:3000/toggleSound?status=${status}`);
-// }
+
 //GETTERS/SELECTORS/QUERY
 export async function getGooglePoints() {
     const response = await fetch("http://localhost:3000/getGooglePoints");
@@ -94,6 +87,19 @@ export async function getPointsToLoseBlockValues() {
     const responsePayload = await response.json();
     return responsePayload.data;
 }
+export async function getSoundStatus() {
+    const response = await fetch("http://localhost:3000/getSoundStatus");
+    const responsePayload = await response.json();
+    return responsePayload.data;
+}
+export async function getStartButtonStatus() {
+    const response = await fetch("http://localhost:3000/getStartButtonStatus");
+    const responsePayload = await response.json();
+    return responsePayload.data;
+}
+
+
+
 export async function getGridSize() {
     const response = await fetch("http://localhost:3000/getGridSize");
     const responsePayload = await response.json();
@@ -109,11 +115,7 @@ export async function getPlayerPosition(playerNumber) {
     const responsePayload = await response.json();
     return responsePayload.data;
 }
-export async function getSoundStatus() {
-    const response = await fetch("http://localhost:3000/getSoundStatus");
-    const responsePayload = await response.json();
-    return responsePayload.data;
-}
+
 
 //local changes
 
@@ -124,6 +126,7 @@ _notifyObservers(name, payload);
 
 export async function saveSettings() {
     if(localState.settingsValues.length > 0) {
+        // _notifyObservers(EVENTS.GAME_STATUS_CHANGED)
         const stringifiedSettingsValues = JSON.stringify(localState.settingsValues)
         await fetch(`http://localhost:3000/saveSettings?newSettings=${stringifiedSettingsValues}`)
     } else return;
@@ -134,6 +137,11 @@ export function  saveValue(newValue) {
     } else {
         const index = localState.settingsValues.findIndex(object => object.name === newValue.name)
         localState.settingsValues[index] = newValue
+    }
+    console.log(localState.settingsValues)
+    if(localState.settingsValues.length === 4) {
+        console.log('Settings values are chousen')
+        _notifyObservers(EVENTS.START_BUTTON_STATUS_CHANGED, false)
     }
    
 }

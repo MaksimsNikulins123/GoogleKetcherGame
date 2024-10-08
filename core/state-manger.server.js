@@ -1,4 +1,4 @@
-import { EVENTS, GAME_STATUSES, GRID_SIZE_BLOCK_VALUES, MOVING_DERECTIONS, POINST_TO_LOSE_BLOCK_VALUES, POINST_TO_WIN_BLOCK_VALUES, SOUND_STATUS } from "./constans.js";
+import { EVENTS, GAME_STATUSES, GRID_SIZE_BLOCK_VALUES, MOVING_DERECTIONS, POINST_TO_LOSE_BLOCK_VALUES, POINST_TO_WIN_BLOCK_VALUES, SOUND_STATUS, START_BUTTON_STATUS } from "./constans.js";
 
 const _state = {
     gameStatus: GAME_STATUSES.SETTINGS,
@@ -10,7 +10,7 @@ const _state = {
         gridSizeBlockValues: GRID_SIZE_BLOCK_VALUES,
         pointsToWinBlockValues: POINST_TO_WIN_BLOCK_VALUES,
         pointsToLoseBlockValues: POINST_TO_LOSE_BLOCK_VALUES,
-        selectedGridSize: null,
+        // selectedGridSize: null,
         gridSize: {
             maxRowCount: 10,
             maxColumnCount: 10,
@@ -20,6 +20,9 @@ const _state = {
         pointsToLose: 10,
         pointsToWin: 5,
         sound: SOUND_STATUS.OFF,
+    },
+    startButton: {
+        status: START_BUTTON_STATUS.disable
     },
     positions: {
         google: {
@@ -44,6 +47,7 @@ const _state = {
 
 //OBSERVER
 let _observers = [];
+
 export function subscribe(observer) {
     _observers.push(observer);
 }
@@ -228,26 +232,7 @@ export async function movePlayer(playerNumber, direction) {
     });
 
 }
-export async function setGridSize(value) {
-    
-    if(_state.settings.gridSizeBlockValues.button.title === value) return;
-    
-    _state.settings.gridSizeBlockValues.button.title = value;
-    _notifyObservers(EVENTS.GRID_SIZE_CHANGED, {
-        value
-    });
 
-}
-// export async function toggleSound(status) {
-    
-//     if(_state.settings.sound === status) return;
-    
-//     _state.settings.sound = status;
-//     _notifyObservers(EVENTS.SOUND_STATUS_CHANGED, {
-//         status
-//     } );
-
-// }
 export async function saveSettings(newSettings) {
     
     const parsedNewSettings = JSON.parse(newSettings);
@@ -291,20 +276,23 @@ export async function getGameStatus() {
     return _state.gameStatus
 }
 export async function getGridSizeBlockValues() {
-    return {
-        ..._state.settings.gridSizeBlockValues
-    }
+    return _state.settings.gridSizeBlockValues
 }
 export async function getPointsToWinBlockValues() {
-    return {
-        ..._state.settings.pointsToWinBlockValues
-    }
+    return _state.settings.pointsToWinBlockValues
 }
 export async function getPointsToLoseBlockValues() {
-    return {
-        ..._state.settings.pointsToLoseBlockValues
-    }
+    return _state.settings.pointsToLoseBlockValues
 }
+export async function getSoundStatus() { 
+    return _state.settings.sound   
+}
+export async function getStartButtonStatus() { 
+    return _state.startButton.status
+    
+}
+
+
 export async function getGridSize() {
     return {
         ..._state.settings.gridSize
@@ -321,9 +309,6 @@ export async function getPlayerPosition(playerNumber) {
         ..._state.positions.players[playerIndex]
     }
 }
-export async function getSoundStatus() { 
-    return _state.settings.sound
-    
-}
+
 
 

@@ -4,6 +4,7 @@ import {
 } from "../../core/constans.js";
 import {
     getGameStatus,
+    getStartButtonStatus,
     subscribe
 } from "../../core/state-manger.proxy.js";
 import {
@@ -30,16 +31,17 @@ import {
 
 export function AppComponent() {
 
-    // console.log('App component created')
+    console.log('App component created')
 
     const localState = {
         prevGameStatus: null,
+        // prevStartButtonStatus: null,
         cleanupFunctions: [],
     };
 
-    const saveSettings = () => {
-        console.log('save settings')
-    }
+    // const saveSettings = () => {
+    //     console.log('save settings')
+    // }
 
     
     const element = document.createElement('div');
@@ -50,21 +52,21 @@ export function AppComponent() {
 
     subscribe((e) => {
         if(e.name === EVENTS.GAME_STATUS_CHANGED) {
-            render(element, localState, saveSettings);
+            render(element, localState);
         }
         
     })
 
-    render(element, localState, saveSettings)
+    render(element, localState)
 
     return {
         element
     };
 }
 
-async function render(element, localState, saveSettings) {
+async function render(element, localState) {
 
-    // console.log('App component render');
+    console.log('App component render');
     
     const gameStatusPromise = getGameStatus();
     const gameStatus = await gameStatusPromise;
@@ -72,6 +74,13 @@ async function render(element, localState, saveSettings) {
     if (localState.prevGameStatus === gameStatus) return;
 
     localState.prevGameStatus = gameStatus;
+
+    const startButtonStatusPromise = getStartButtonStatus();
+    const startButtonStatus = await startButtonStatusPromise;
+
+    // if (localState.prevStartButtonStatus === startButtonStatus) return;
+
+    // localState.prevStartButtonStatus = startButtonStatus;
 
     localState.cleanupFunctions.forEach(cleanupFunction => cleanupFunction());
     localState.cleanupFunctions = [];
@@ -82,7 +91,7 @@ async function render(element, localState, saveSettings) {
         case GAME_STATUSES.SETTINGS: {
             const settingsComponent = SettingsComponent(gameStatus);
             localState.cleanupFunctions.push(settingsComponent.cleanup)
-            const startComponent = StartComponent();
+            const startComponent = StartComponent(startButtonStatus);
             // localState.cleanupFunctions.push(startComponent.cleanup)
             element.append(settingsComponent.element, startComponent.element);
             break;

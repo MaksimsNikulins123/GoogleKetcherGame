@@ -11,13 +11,12 @@ import {
     getPointsToLoseBlockValues,
     getPointsToWinBlockValues,
     getSoundStatus,
+    getStartButtonStatus,
     movePlayer,
     playAgain,
     saveSettings,
-    setGridSize,
     start,
     subscribe,
-    // toggleSound,
     unsubscribe
 } from '../core/state-manger.server.js';
 
@@ -65,16 +64,9 @@ app.get('/movePlayer', async (req, res) => {
     await movePlayer(req.query.playerNumber, req.query.direction);
     res.send(200);
 });
-app.get('/setGridSize', async (req, res) => {
-    await setGridSize(req.query.value);
-    res.send(200);
-    
-});
-// app.get('/toggleSound', async (req, res) => {
-//     await toggleSound(req.query.status);
-//     res.send(200);
-    
-// });
+
+
+
 app.get('/saveSettings', async (req, res) => {
     if(req.query.newSettings == []) return;
     await saveSettings(req.query.newSettings);
@@ -83,14 +75,9 @@ app.get('/saveSettings', async (req, res) => {
     
 });
 
-app.get('/getGooglePoints', async (req, res) => {
-    const googlePoints = await getGooglePoints();
-    res.send({data: googlePoints});
-});
-app.get('/getPlayerPoints', async (req, res) => {
-    const playerPoints = await getPlayerPoints(req.query.playerNumber);
-    res.send({data: playerPoints});
-});
+
+
+
 app.get('/getGameStatus', async (req, res) => {
     const gameStatus = await getGameStatus();
     res.send({data: gameStatus});
@@ -107,6 +94,28 @@ app.get('/getPointsToLoseBlockValues', async (req, res) => {
     const pointsToLoseBlockValues = await getPointsToLoseBlockValues();
     res.send({data: pointsToLoseBlockValues});
 });
+app.get('/getSoundStatus', async (req, res) => {
+    const soundStatus = await getSoundStatus();
+    res.send({data: soundStatus});
+});
+app.get('/getStartButtonStatus', async (req, res) => {
+    const startButtonStatus = await getStartButtonStatus();
+    res.send({data: startButtonStatus});
+});
+
+
+
+
+app.get('/getGooglePoints', async (req, res) => {
+    const googlePoints = await getGooglePoints();
+    res.send({data: googlePoints});
+});
+app.get('/getPlayerPoints', async (req, res) => {
+    const playerPoints = await getPlayerPoints(req.query.playerNumber);
+    res.send({data: playerPoints});
+});
+
+
 app.get('/getGridSize', async (req, res) => {
     const gridSize = await getGridSize();
     res.send({data: gridSize});
@@ -119,10 +128,7 @@ app.get('/getPlayerPosition', async (req, res) => {
     const playerPosition = await getPlayerPosition(req.query.playerNumber);
     res.send({data: playerPosition});
 });
-app.get('/getSoundStatus', async (req, res) => {
-    const soundStatus = await getSoundStatus();
-    res.send({data: soundStatus});
-});
+
 
 app.listen(port, () => {
     console.log(`Express app listening at http://localhost:${port}`);

@@ -6,6 +6,8 @@ import { SetTitle } from "../../common/SetTitle/SetTitle.component.js";
 export function SoundComponent(soundStatus) {
     // console.log("Sound Component created")
 
+    saveValue({name: EVENTS.SAVE_SOUND_STATUS, payload: soundStatus})
+    
     const getValue = (e) => {
         localState.soundStatus = e;
         saveValue({name: EVENTS.SAVE_SOUND_STATUS, payload: localState.soundStatus})
