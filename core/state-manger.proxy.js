@@ -138,9 +138,9 @@ export function  saveValue(newValue) {
         const index = localState.settingsValues.findIndex(object => object.name === newValue.name)
         localState.settingsValues[index] = newValue
     }
-    console.log(localState.settingsValues)
+    // console.log(localState.settingsValues)
     if(localState.settingsValues.length === 4) {
-        console.log('Settings values are chousen')
+        // console.log('Settings values are chousen')
         _notifyObservers(EVENTS.START_BUTTON_STATUS_CHANGED, false)
     }
    

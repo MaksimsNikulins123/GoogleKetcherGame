@@ -31,7 +31,7 @@ import {
 
 export function AppComponent() {
 
-    console.log('App component created')
+    // console.log('App component created')
 
     const localState = {
         prevGameStatus: null,
@@ -66,7 +66,7 @@ export function AppComponent() {
 
 async function render(element, localState) {
 
-    console.log('App component render');
+    // console.log('App component render');
     
     const gameStatusPromise = getGameStatus();
     const gameStatus = await gameStatusPromise;
