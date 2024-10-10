@@ -287,10 +287,10 @@ export async function getPointsToLoseBlockValues() {
 export async function getSoundStatus() { 
     return _state.settings.sound   
 }
-export async function getStartButtonStatus() { 
-    return _state.startButton.status
+// export async function getStartButtonStatus() { 
+//     return _state.startButton.status
     
-}
+// }
 
 
 export async function getGridSize() {

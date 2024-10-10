@@ -35,15 +35,15 @@ export function SettingsComponent() {
     element.classList.add('settings');
     element.id = 'settings';
 
-    
+    // const startButtonElement = document.getElementById('start-btn')
 
-    window.onresize = function () {
-        const startButtonElement = document.getElementById('start-btn')
-        if (window.innerWidth >= 1000) {  
-            element.classList.remove('active')
-            startButtonElement.classList.remove('hide')
-        }
-    }
+    // window.onresize = function () {
+        
+    //     if (window.innerWidth >= 1000) {  
+    //         element.classList.remove('active')
+    //         startButtonElement.classList.remove('hide')
+    //     }
+    // }
 
     render(element, localState)
 

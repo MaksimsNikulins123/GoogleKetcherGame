@@ -1,10 +1,10 @@
 /* Constants */
 
 :root {
-    --max-width-1200: 1200px;
-    --max-width-1000: 1000px;
-    --max-width-768: 768px;
-    --max-width-480: 480px;
+    --min-width-1200: 1200px;
+    --min-width-992: 992px;
+    --min-width-768: 768px;
+    --min-width-480: 480px;
 
 }
 /* Reset default styles */
@@ -23,18 +23,11 @@ body, html {
     background-position: center; /* Centers the image */
     background-repeat: no-repeat; /* Prevents the image from repeating */
     height: 100%;
+    gap: 10px;
     display: flex;
     align-items: center;
     flex-direction: column;
 }
-
-@media (max-width: 1000px) {
-    .app {
-        position: relative;
-    }
-}
-
-
 .settings {
     display: flex;
     align-items: center;
@@ -46,22 +39,6 @@ body, html {
     margin: 20px;
     width: 1000px;
 }
-/* .settings.disable .dropdown {
-    opacity: 0.6;
-    cursor: not-allowed;
-} */
-@media (max-width: 1000px) {
-    .settings {
-        position: absolute;
-        flex-direction: column;
-        padding: 100px 20px 20px 20px;
-        width: 200px;
-        top: -800px;
-        height: 600px;
-        transition: transform .3s;
-    } 
-} 
-
 .burger-btn {
     display: none;
     position: absolute;
@@ -71,32 +48,6 @@ body, html {
     border: none;
     background-color: transparent;
     cursor: pointer;
-}
-
-@media (max-width: 1000px) {
-    .burger-btn {
-        display: block;
-        z-index: 1; 
-        top: 820px;
-    }
-    /* .settings{
-        position: absolute;
-        top: -750px;
-        margin: 0;
-    }  */
-    .settings.active {
-        
-      
-        /* top: 10px; */
-       
-        transform: translateY(800px);
-    } 
-
-    .settings.active .burger-btn{
-        top: 10px;
-    }
-   
-   
 }
 .burger-btn span {
     position: absolute;
@@ -121,7 +72,6 @@ body, html {
 .settings.active .burger-btn span:nth-child(3) {
     transform: translateY(0) rotate(-45deg);
 }
-
 .settings div{
     display: flex;
     flex-direction: column;
@@ -129,13 +79,6 @@ body, html {
     padding: 10px;
     width: 100%;
 }
-@media (max-width: 800px) {
-    .settings div{
-        width: 30vw;
-    } 
-} 
-
-
 .dropdown {
     position: relative;
      }
@@ -150,21 +93,14 @@ body, html {
     width: 100%;
     text-wrap: nowrap;
   }
-/* .dropdown-toggle.disable {
-
-} */
- 
-
 .dropdown-toggle:hover {
     background-color: #2980b9;
 }
 .dropdown-menu  {
     display: block;
     position: absolute;
-    /* position: absolute; */
     background-color: #f9f9f9;
     color: black;
-    /* width: 100%; */
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
     z-index: 1;
     border-radius: 4px;
@@ -173,40 +109,23 @@ body, html {
     text-decoration: none;
     top: 48px;
     width: 60%;
- 
-    /* margin-top: 150px; */
-    /* margin-left: 50px; */
-    /* padding: 0 20px; */
   }
-  @media (max-width: 800px) {
-    .dropdown-menu{
-        top: 0;
-        /* padding: 0; */
-        position: inherit;
-    } 
-} 
-
 .dropdown-menu.hide{
     display: none;
 }
 .dropdown-menu .dropdown-item {
-    cursor: pointer;
-    
+    cursor: pointer;  
 }
 .dropdown-menu .dropdown-item:hover {
     background-color: #f1f1f1;
     border-radius: 4px;
   }
-  
 .dropdown-item {
     display: flex;
     justify-content: center;
     align-items:center;
-    /* margin: 0 20px; */
-    padding: 0 40px;
-    
+    padding: 0 40px; 
 }
-
 .soundSwitcher {
     display: flex;
     flex-direction: column;
@@ -218,10 +137,7 @@ body, html {
     position: relative;
     width: 60px;
     height: 38px;
-
-    /* background-color: red; */
 }
- 
 .switch__input {
     height: 0;
     width: 0;
@@ -235,13 +151,11 @@ body, html {
     bottom: 0;
     right: 0;
     border-radius: 38px;
-    background-color:#ccc;
-    
+    background-color:#ccc; 
 }
 .switch__slider::before {
     content: "";
     position: absolute;
-    /* cursor: pointer; */
     top: 6px;
     left: 6px;
     height: 26px;
@@ -258,24 +172,17 @@ body, html {
 .switch__input:checked + .switch__slider::before {
     transform: translateX(20px);
     background-color:white;
-
 }
-
-
 .result-panel {
     border: 1px solid black;
     padding: 3px;
+    width: 250px;
+    height: 30px;
+    align-content: center;
 }
 .content {
-    
-    /* display: flex; */
-    /* justify-content: center;
-    align-items:center; */
     height: 100rem;
-    /* width: 100%; */
-    margin-top: 300px;
-    /* height: 100%; */
-    /* min-height: 1920px; */
+    /* margin-top: 300px; */
 }
 .grid td {
     border: 1px solid black;
@@ -286,7 +193,6 @@ body, html {
 .grid img {
     padding: 1px;
 }
-
 .start-btn {
     display: block;
     border: 1px solid #3498db;
@@ -305,7 +211,6 @@ body, html {
 .start-btn.hide {
     display: none;
 }
-
 .start-btn:hover {
     color:#fff;
 }
@@ -325,3 +230,64 @@ body, html {
     height: 180%;
 }
 
+
+
+/* MEDIA QUERIES */
+
+
+@media (max-width: 1200px) {
+    .app {
+        position: relative;
+    }
+    .settings {
+        position: absolute;
+        flex-direction: column;
+        padding: 100px 20px 20px 20px;
+        width: 200px;
+        top: -800px;
+        height: 600px;
+        transition: transform .3s;
+    }
+    .settings.active {
+        transform: translateY(800px);
+    }
+    .settings.active .burger-btn{
+        top: 10px;
+    } 
+    .burger-btn {
+        display: block;
+        z-index: 1; 
+        top: 820px;
+    }
+    .content {
+        margin-top: 150px;
+    }
+}   
+@media (max-width: 800px) {
+    .settings div{
+        width: 30vw;
+    } 
+} 
+@media (max-width: 1000px) {
+    .burger-btn {
+        display: block;
+        z-index: 1; 
+        top: 820px;
+    }
+}
+@media (max-width: 800px) {
+    .dropdown-menu{
+        top: 0;
+        position: inherit;
+    } 
+} 
+@media (max-width: 1000px) {
+    .result-panel {
+        background-color: red;
+    } 
+}
+@media (max-width: 800px) {
+    .result-panel {
+        background-color: green;
+    } 
+}

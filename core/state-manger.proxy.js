@@ -92,11 +92,11 @@ export async function getSoundStatus() {
     const responsePayload = await response.json();
     return responsePayload.data;
 }
-export async function getStartButtonStatus() {
-    const response = await fetch("http://localhost:3000/getStartButtonStatus");
-    const responsePayload = await response.json();
-    return responsePayload.data;
-}
+// export async function getStartButtonStatus() {
+//     const response = await fetch("http://localhost:3000/getStartButtonStatus");
+//     const responsePayload = await response.json();
+//     return responsePayload.data;
+// }
 
 
 
@@ -140,8 +140,10 @@ export function  saveValue(newValue) {
     }
     // console.log(localState.settingsValues)
     if(localState.settingsValues.length === 4) {
+        const startButton = document.getElementById('start-btn')
+        startButton.disabled = false
         // console.log('Settings values are chousen')
-        _notifyObservers(EVENTS.START_BUTTON_STATUS_CHANGED, false)
+        // _notifyObservers(EVENTS.START_BUTTON_STATUS_CHANGED, false)
     }
    
 }
