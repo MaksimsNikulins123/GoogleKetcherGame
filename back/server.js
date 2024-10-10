@@ -11,7 +11,6 @@ import {
     getPointsToLoseBlockValues,
     getPointsToWinBlockValues,
     getSoundStatus,
-    // getStartButtonStatus,
     movePlayer,
     playAgain,
     saveSettings,
@@ -98,10 +97,7 @@ app.get('/getSoundStatus', async (req, res) => {
     const soundStatus = await getSoundStatus();
     res.send({data: soundStatus});
 });
-// app.get('/getStartButtonStatus', async (req, res) => {
-//     const startButtonStatus = await getStartButtonStatus();
-//     res.send({data: startButtonStatus});
-// });
+
 
 
 

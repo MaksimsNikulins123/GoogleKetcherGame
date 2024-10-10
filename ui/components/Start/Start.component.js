@@ -1,5 +1,6 @@
 
 import {
+    getStartButtonStatus,
     // saveSettings,
     start,
 } from "../../../core/state-manger.proxy.js";
@@ -7,7 +8,7 @@ import {
 
 export function StartComponent() {
 
-    console.log("StartComponent created")
+    // console.log("StartComponent created")
     const element = document.createElement('div');
     element.classList.add('content');
 
@@ -20,14 +21,15 @@ export function StartComponent() {
 }
 
 async function render(element) {
-    console.log("StartComponent render")
+    // console.log("StartComponent render")
 
     element.innerHTML = '';
     const button = document.createElement('button');
     button.classList.add('start-btn')
     button.id = 'start-btn';
     button.append('START GAME');
-    button.disabled = true
+    console.log(getStartButtonStatus()) 
+    getStartButtonStatus() === 4 ? button.disabled = false : button.disabled = true
 
 
 
