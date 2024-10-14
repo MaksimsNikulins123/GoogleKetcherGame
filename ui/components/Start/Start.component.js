@@ -1,12 +1,17 @@
 
-import {
-    getStartButtonStatus,
-    // saveSettings,
+import { stringToBoolean } from './../common/SringToBoolean/StringToBoolean.component.js';
+import {  
+
     start,
 } from "../../../core/state-manger.proxy.js";
 
 
-export function StartComponent() {
+export function StartComponent(status) {
+
+    console.log(status)
+    console.log(localStorage.length)
+
+    localStorage.setItem('startButtonDisableStatus', status)
 
     // console.log("StartComponent created")
     const element = document.createElement('div');
@@ -28,8 +33,9 @@ async function render(element) {
     button.classList.add('start-btn')
     button.id = 'start-btn';
     button.append('START GAME');
-    console.log(getStartButtonStatus()) 
-    getStartButtonStatus() === 4 ? button.disabled = false : button.disabled = true
+    button.disabled = stringToBoolean(localStorage.getItem('startButtonDisableStatus'))
+    // console.log(getStartButtonStatus()) 
+    // getStartButtonStatus() === 4 ? button.disabled = false : button.disabled = true
 
 
 

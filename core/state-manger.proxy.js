@@ -11,9 +11,9 @@ eventSource.addEventListener('message', (eventSourseEvent) => {
 })
 //LocalState
 
-const localState = {
-    settingsValues: []
-}
+// const localState = {
+//     settingsValues: []
+// }
 //OBSERVER
 let _observers = [];
 export function subscribe(observer) {
@@ -92,11 +92,10 @@ export async function getSoundStatus() {
     const responsePayload = await response.json();
     return responsePayload.data;
 }
-export function getStartButtonStatus() {
-    return localState.settingsValues.length
-    // const response = await fetch("http://localhost:3000/getStartButtonStatus");
-    // const responsePayload = await response.json();
-    // return responsePayload.data;
+export async function getStartButtonStatus() {
+    const response = await fetch("http://localhost:3000/getStartButtonStatus");
+    const responsePayload = await response.json();
+    return responsePayload.data;
 }
 
 
@@ -121,34 +120,44 @@ export async function getPlayerPosition(playerNumber) {
 //local changes
 
 export function setValue(name, payload) {
-    
+    if(localStorage.length === 5) {
+    const startButton = document.getElementById('start-btn')
+    if(startButton !== null) {
+        startButton.disabled = false
+     localStorage.setItem('startButtonDisableStatus', 'false')
+    }
+}
 _notifyObservers(name, payload);
 }
 
 export async function saveSettings() {
-    if(localState.settingsValues.length > 0) {
+    
+    if(localStorage.length === 5) {
         // _notifyObservers(EVENTS.GAME_STATUS_CHANGED)
-        const stringifiedSettingsValues = JSON.stringify(localState.settingsValues)
+        // const stringifiedSettingsValues = JSON.stringify(localState.settingsValues)
+        const stringifiedSettingsValues = JSON.stringify(localStorage)
         await fetch(`http://localhost:3000/saveSettings?newSettings=${stringifiedSettingsValues}`)
+        // await fetch(`http://localhost:3000/saveSettings?newSettings=${localStorage}`)
     } else return;
 }
-export function  saveValue(newValue) {
-    if(localState.settingsValues.findIndex(object => object.name === newValue.name) < 0) {
-        localState.settingsValues.push(newValue)
-    } else {
-        const index = localState.settingsValues.findIndex(object => object.name === newValue.name)
-        localState.settingsValues[index] = newValue
-    }
-    // console.log(localState.settingsValues)
-    if(localState.settingsValues.length === 4) {
-        const startButton = document.getElementById('start-btn')
-        if(startButton !== null) {
-            startButton.disabled = false
-        }
-        
-        // console.log('Settings values are chousen')
-        // _notifyObservers(EVENTS.START_BUTTON_STATUS_CHANGED, false)
-    }
+// export function  saveValue(newValue) {
+
+//     if(localState.settingsValues.findIndex(object => object.name === newValue.name) < 0) {
+//         localState.settingsValues.push(newValue)
+//     } else {
+//         const index = localState.settingsValues.findIndex(object => object.name === newValue.name)
+//         localState.settingsValues[index] = newValue
+//     }
+//     // console.log(localState.settingsValues)
+//     if(localState.settingsValues.length === 4) {
+//         const startButton = document.getElementById('start-btn')
+//         if(startButton !== null) {
+//             startButton.disabled = false
+//         }
+    
+//         // console.log('Settings values are chousen')
+//         // _notifyObservers(EVENTS.START_BUTTON_STATUS_CHANGED, false)
+//     }
    
-}
+// }
 

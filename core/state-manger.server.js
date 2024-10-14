@@ -19,7 +19,7 @@ const _state = {
         },
         pointsToLose: 10,
         pointsToWin: 5,
-        sound: SOUND_STATUS.OFF,
+        sound: SOUND_STATUS.off,
     },
     startButton: {
         status: START_BUTTON_STATUS.disable
@@ -234,25 +234,32 @@ export async function movePlayer(playerNumber, direction) {
 }
 
 export async function saveSettings(newSettings) {
-    
+    // console.log(typeof(newSettings));
     const parsedNewSettings = JSON.parse(newSettings);
-    // console.log(JSON.parse(newSettings));
+
+    _state.settings.gridSizeBlockValues.button.title = parsedNewSettings.gridSize;
+    _state.settings.pointsToWinBlockValues.button.title = parsedNewSettings.pointsToWin;
+    _state.settings.pointsToLoseBlockValues.button.title = parsedNewSettings.pointsToLose;
+    _state.settings.sound = parsedNewSettings.soundStatus;
+    _state.startButton.status = parsedNewSettings.startButtonDisableStatus;
+    // const parsedNewSettings = JSON.parse(newSettings);
+    // console.log(parsedNewSettings);
     // if(_state.settings.sound === status) return;
-    for (let index = 0; index < parsedNewSettings.length; index++) {
-        if(parsedNewSettings[index].name == EVENTS.SAVE_GRID_SIZE_SETTINGS_VALUE) {
-            _state.settings.gridSizeBlockValues.button.title = parsedNewSettings[index].payload
-        }
-        if(parsedNewSettings[index].name == EVENTS.SAVE_POINTS_TO_WIN_SETTINGS_VALUE) {
-            _state.settings.pointsToWinBlockValues.button.title = parsedNewSettings[index].payload
-        }
-        if(parsedNewSettings[index].name == EVENTS.SAVE_POINTS_TO_LOSE_SETTINGS_VALUE) {
-            _state.settings.pointsToLoseBlockValues.button.title = parsedNewSettings[index].payload
-        }
-        if(parsedNewSettings[index].name == EVENTS.SAVE_SOUND_STATUS) {
-            _state.settings.sound = JSON.stringify(parsedNewSettings[index].payload)
-        }
+    // for (let index = 0; index < parsedNewSettings.length; index++) {
+    //     if(parsedNewSettings[index].name == EVENTS.SAVE_GRID_SIZE_SETTINGS_VALUE) {
+    //         _state.settings.gridSizeBlockValues.button.title = parsedNewSettings[index].payload
+    //     }
+    //     if(parsedNewSettings[index].name == EVENTS.SAVE_POINTS_TO_WIN_SETTINGS_VALUE) {
+    //         _state.settings.pointsToWinBlockValues.button.title = parsedNewSettings[index].payload
+    //     }
+    //     if(parsedNewSettings[index].name == EVENTS.SAVE_POINTS_TO_LOSE_SETTINGS_VALUE) {
+    //         _state.settings.pointsToLoseBlockValues.button.title = parsedNewSettings[index].payload
+    //     }
+    //     if(parsedNewSettings[index].name == EVENTS.SAVE_SOUND_STATUS) {
+    //         _state.settings.sound = JSON.stringify(parsedNewSettings[index].payload)
+    //     }
         
-    }
+    // }
     // _state.settings.sound = status;
     _notifyObservers(EVENTS.NEW_SETTINGS_VALUE_SAVED, {
         newSettings
@@ -286,6 +293,9 @@ export async function getPointsToLoseBlockValues() {
 }
 export async function getSoundStatus() { 
     return _state.settings.sound   
+}
+export async function getStartButtonStatus() { 
+    return _state.startButton.status  
 }
 
 

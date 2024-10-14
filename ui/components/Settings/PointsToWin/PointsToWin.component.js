@@ -1,14 +1,18 @@
 
 import { EVENTS, POINST_TO_WIN_BLOCK_VALUES } from "../../../../core/constans.js";
-import { saveValue, setValue, subscribe } from "../../../../core/state-manger.proxy.js";
+import { setValue, subscribe } from "../../../../core/state-manger.proxy.js";
 import { DropDownListComponent } from "../../common/DropDownList/DropDownList.component.js";
 import { SetTitle } from "../../common/SetTitle/SetTitle.component.js";
 
 export function PointsToWinComponent(pointsToWinBlockValues) {
     //  console.log("PointsToWin componenet created")
+    if(pointsToWinBlockValues.button.title !== POINST_TO_WIN_BLOCK_VALUES.button.title) {
+        localStorage.setItem('pointsToWin', pointsToWinBlockValues.button.title)
+    }
     const getValue = (e) => {
         localState.buttonTitle = e.newValue;
-        saveValue({name: EVENTS.SAVE_POINTS_TO_WIN_SETTINGS_VALUE, payload: localState.buttonTitle})
+        localStorage.setItem("pointsToWin", e.newValue);
+        // saveValue({name: EVENTS.SAVE_POINTS_TO_WIN_SETTINGS_VALUE, payload: localState.buttonTitle})
         setValue(EVENTS.POINTS_TO_WIN_CHANGED, e)
         }
 

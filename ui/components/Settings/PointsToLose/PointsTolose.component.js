@@ -1,9 +1,9 @@
 import {
     EVENTS,
-    POINST_TO_LOSE_BLOCK_VALUES
+    POINST_TO_LOSE_BLOCK_VALUES,
+
 } from "../../../../core/constans.js";
 import {
-    saveValue,
     setValue,
     subscribe
 } from "../../../../core/state-manger.proxy.js";
@@ -16,12 +16,14 @@ import {
 
 export function PointsToLoseComponent(pointsToLoseBlockValues) {
     // console.log("PointsToLoseComponent created")
-  
-   
 
+    if(pointsToLoseBlockValues.button.title !== POINST_TO_LOSE_BLOCK_VALUES.button.title) {
+        localStorage.setItem('pointsToLose', pointsToLoseBlockValues.button.title)
+    }
     const getValue = (e) => {
         localState.buttonTitle = e.newValue;
-        saveValue({name: EVENTS.SAVE_POINTS_TO_LOSE_SETTINGS_VALUE, payload: localState.buttonTitle})
+        localStorage.setItem("pointsToLose", e.newValue);
+        // saveValue({name: EVENTS.SAVE_POINTS_TO_LOSE_SETTINGS_VALUE, payload: localState.buttonTitle})
         setValue(EVENTS.POINTS_TO_LOSE_CHANGED, e)
     }
     const localState = {

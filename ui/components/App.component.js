@@ -4,6 +4,7 @@ import {
 } from "../../core/constans.js";
 import {
     getGameStatus,
+    getStartButtonStatus,
     // getStartButtonStatus,
     subscribe
 } from "../../core/state-manger.proxy.js";
@@ -75,8 +76,8 @@ async function render(element, localState) {
 
     localState.prevGameStatus = gameStatus;
 
-    // const startButtonStatusPromise = getStartButtonStatus();
-    // const startButtonStatus = await startButtonStatusPromise;
+    const startButtonStatusPromise = getStartButtonStatus();
+    const startButtonStatus = await startButtonStatusPromise;
 
     // if (localState.prevStartButtonStatus === startButtonStatus) return;
 
@@ -91,8 +92,7 @@ async function render(element, localState) {
         case GAME_STATUSES.SETTINGS: {
             const settingsComponent = SettingsComponent(gameStatus);
             localState.cleanupFunctions.push(settingsComponent.cleanup)
-            // const startComponent = StartComponent(startButtonStatus);
-            const startComponent = StartComponent();
+            const startComponent = StartComponent(startButtonStatus);
             localState.cleanupFunctions.push(startComponent.cleanup)
             element.append(settingsComponent.element, startComponent.element);
             break;
