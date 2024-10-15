@@ -123,10 +123,12 @@ function _isPositionInValidRange(position) {
 }
 
 function _catchGoogle(playerNumber) {
+    // console.log(playerNumber)
     const playerIndex = _getPlayerIndexByNumber(playerNumber);
 
     _state.points.players[playerIndex]++;
-    _notifyObservers(EVENTS.SCORES_CHANGED);
+    // _notifyObservers('PLAYER'+`${playerNumber}`+'_SCORES_CHANGED')
+    _notifyObservers(EVENTS[`PLAYER${playerNumber}_SCORES_CHANGED`])
     _notifyObservers(EVENTS.GOOGLE_COUGHT);
 
     if(_state.points.players[playerIndex] === _state.settings.pointsToWin) {
@@ -172,7 +174,7 @@ export async function start() {
 
         //points changed
         _state.points.google++;
-        _notifyObservers(EVENTS.SCORES_CHANGED);
+        _notifyObservers(EVENTS.GOOGLE_SCORE_CHANGED);
         //check if status changed
         if (_state.points.google === _state.settings.pointsToLose) {
             clearInterval(googleJumpInterval);
@@ -236,31 +238,11 @@ export async function movePlayer(playerNumber, direction) {
 export async function saveSettings(newSettings) {
     // console.log(typeof(newSettings));
     const parsedNewSettings = JSON.parse(newSettings);
-
     _state.settings.gridSizeBlockValues.button.title = parsedNewSettings.gridSize;
     _state.settings.pointsToWinBlockValues.button.title = parsedNewSettings.pointsToWin;
     _state.settings.pointsToLoseBlockValues.button.title = parsedNewSettings.pointsToLose;
     _state.settings.sound = parsedNewSettings.soundStatus;
     _state.startButton.status = parsedNewSettings.startButtonDisableStatus;
-    // const parsedNewSettings = JSON.parse(newSettings);
-    // console.log(parsedNewSettings);
-    // if(_state.settings.sound === status) return;
-    // for (let index = 0; index < parsedNewSettings.length; index++) {
-    //     if(parsedNewSettings[index].name == EVENTS.SAVE_GRID_SIZE_SETTINGS_VALUE) {
-    //         _state.settings.gridSizeBlockValues.button.title = parsedNewSettings[index].payload
-    //     }
-    //     if(parsedNewSettings[index].name == EVENTS.SAVE_POINTS_TO_WIN_SETTINGS_VALUE) {
-    //         _state.settings.pointsToWinBlockValues.button.title = parsedNewSettings[index].payload
-    //     }
-    //     if(parsedNewSettings[index].name == EVENTS.SAVE_POINTS_TO_LOSE_SETTINGS_VALUE) {
-    //         _state.settings.pointsToLoseBlockValues.button.title = parsedNewSettings[index].payload
-    //     }
-    //     if(parsedNewSettings[index].name == EVENTS.SAVE_SOUND_STATUS) {
-    //         _state.settings.sound = JSON.stringify(parsedNewSettings[index].payload)
-    //     }
-        
-    // }
-    // _state.settings.sound = status;
     _notifyObservers(EVENTS.NEW_SETTINGS_VALUE_SAVED, {
         newSettings
     } );

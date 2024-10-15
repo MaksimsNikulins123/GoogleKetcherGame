@@ -7,13 +7,11 @@ import {
 
 
 export function StartComponent(status) {
-
-    console.log(status)
-    console.log(localStorage.length)
+    // console.log("StartComponent created")
 
     localStorage.setItem('startButtonDisableStatus', status)
 
-    // console.log("StartComponent created")
+    
     const element = document.createElement('div');
     element.classList.add('content');
 
@@ -34,11 +32,6 @@ async function render(element) {
     button.id = 'start-btn';
     button.append('START GAME');
     button.disabled = stringToBoolean(localStorage.getItem('startButtonDisableStatus'))
-    // console.log(getStartButtonStatus()) 
-    // getStartButtonStatus() === 4 ? button.disabled = false : button.disabled = true
-
-
-
     button.addEventListener('click', () => {
         // saveSettings()
         start();

@@ -177,8 +177,12 @@ body, html {
     border: 1px solid black;
     padding: 3px;
     width: 250px;
-    height: 30px;
-    align-content: center;
+    height: 30px; 
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    background-color: #4c9cd1;
+    border-radius: 5px;
 }
 .content {
     height: 100rem;
@@ -259,6 +263,9 @@ body, html {
         z-index: 1; 
         top: 820px;
     }
+    .result-panel {
+        margin-top: 100px;
+    } 
     .content {
         margin-top: 150px;
     }
@@ -282,9 +289,7 @@ body, html {
     } 
 } 
 @media (max-width: 1000px) {
-    .result-panel {
-        background-color: red;
-    } 
+   
 }
 @media (max-width: 800px) {
     .result-panel {
