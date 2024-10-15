@@ -184,6 +184,7 @@ body, html {
     background-color: #4c9cd1;
     border-radius: 5px;
 }
+
 .content {
     height: 100rem;
     /* margin-top: 300px; */
@@ -270,7 +271,7 @@ body, html {
         margin-top: 150px;
     }
 }   
-@media (max-width: 800px) {
+/* @media (max-width: 800px) {
     .settings div{
         width: 30vw;
     } 
@@ -295,4 +296,4 @@ body, html {
     .result-panel {
         background-color: green;
     } 
-}
+} */

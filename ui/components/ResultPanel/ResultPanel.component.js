@@ -4,7 +4,7 @@ import { Player2PointsComponent } from "./PointsComponent/Player2Points.componen
 
 
 export function ResultPanelComponent() {
-    console.log("ResultPanelComponent created")
+    // console.log("ResultPanelComponent created")
     const element = document.createElement('div');
 
     element.classList.add('result-panel');
@@ -18,7 +18,7 @@ export function ResultPanelComponent() {
 }
 
 async function render(element) {
-    console.log("ResultPanelComponent render")
+    // console.log("ResultPanelComponent render")
 
     element.innerHTML = '';
 

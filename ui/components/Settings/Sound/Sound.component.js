@@ -11,7 +11,6 @@ export function SoundComponent(soundStatus) {
     const getValue = (e) => {
         localState.soundStatus = e;
         localStorage.setItem("soundStatus", e);
-        // saveValue({name: EVENTS.SAVE_SOUND_STATUS, payload: localState.soundStatus})
         setValue(EVENTS.SOUND_STATUS_CHANGED, e)
         }
 

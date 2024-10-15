@@ -5,9 +5,11 @@ import {
 import {
     getGameStatus,
     getStartButtonStatus,
+    saveSettings,
     // getStartButtonStatus,
     subscribe
 } from "../../core/state-manger.proxy.js";
+
 import {
     AudioComponent
 } from "./Audio/Audio.component.js";
@@ -53,6 +55,7 @@ export function AppComponent() {
 
     subscribe((e) => {
         if(e.name === EVENTS.GAME_STATUS_CHANGED) {
+            saveSettings();
             render(element, localState);
         }
         
@@ -104,14 +107,17 @@ async function render(element, localState) {
             localState.cleanupFunctions.push(resultPanelComponent.cleanup)
             const gridComponent = GridComponent();
             localState.cleanupFunctions.push(gridComponent.cleanup)
-
             element.append(settingsComponent.element, resultPanelComponent.element, gridComponent.element)
             break;
-        case GAME_STATUSES.LOSE:
+        case GAME_STATUSES.LOSE:{
+            const settingsComponent = SettingsComponent(gameStatus);
+            localState.cleanupFunctions.push(settingsComponent.cleanup)
             const loseComponent = LoseComponent();
             //    localState.cleanupFunctions.push(loseComponent.cleanup)
-            element.append(loseComponent.element)
+            element.append(settingsComponent.element, loseComponent.element)
             break;
+        }
+            
         case GAME_STATUSES.WIN:
             const winComponent = WinComponent();
             //    localState.cleanupFunctions.push(loseComponent.cleanup)

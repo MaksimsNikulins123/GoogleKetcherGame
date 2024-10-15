@@ -14,7 +14,7 @@ import {
     SetTitle
 } from "../../common/SetTitle/SetTitle.component.js";
 
-export function PointsToLoseComponent(pointsToLoseBlockValues) {
+export function PointsToLoseComponent(pointsToLoseBlockValues, gameStatus) {
     // console.log("PointsToLoseComponent created")
 
     if(pointsToLoseBlockValues.button.title !== POINST_TO_LOSE_BLOCK_VALUES.button.title) {
@@ -27,6 +27,7 @@ export function PointsToLoseComponent(pointsToLoseBlockValues) {
         setValue(EVENTS.POINTS_TO_LOSE_CHANGED, e)
     }
     const localState = {
+        gameStatus: gameStatus,
         title: pointsToLoseBlockValues.title,
         buttonTitle: pointsToLoseBlockValues.button.title,
         list: pointsToLoseBlockValues.button.payload,
@@ -61,7 +62,7 @@ async function render(element, localState) {
 
     const pointsToWinTitleComponent = SetTitle(localState.title);
 
-    const dropDownListComponent = DropDownListComponent(localState.buttonTitle, localState.list, localState.getValue);
+    const dropDownListComponent = DropDownListComponent(localState.buttonTitle, localState.list, localState.getValue, localState.gameStatus);
 
     element.append(pointsToWinTitleComponent.element, dropDownListComponent.element);
 

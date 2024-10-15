@@ -4,7 +4,7 @@ import { setValue, subscribe } from "../../../../core/state-manger.proxy.js";
 import { DropDownListComponent } from "../../common/DropDownList/DropDownList.component.js";
 import { SetTitle } from "../../common/SetTitle/SetTitle.component.js";
 
-export function PointsToWinComponent(pointsToWinBlockValues) {
+export function PointsToWinComponent(pointsToWinBlockValues,  gameStatus) {
     //  console.log("PointsToWin componenet created")
     if(pointsToWinBlockValues.button.title !== POINST_TO_WIN_BLOCK_VALUES.button.title) {
         localStorage.setItem('pointsToWin', pointsToWinBlockValues.button.title)
@@ -17,6 +17,7 @@ export function PointsToWinComponent(pointsToWinBlockValues) {
         }
 
     const localState = {
+        gameStatus: gameStatus,
         title: pointsToWinBlockValues.title,
         buttonTitle: pointsToWinBlockValues.button.title,
         list: pointsToWinBlockValues.button.payload,
@@ -51,7 +52,7 @@ async function render(element, localState) {
 
     const pointsToWinTitleComponent = SetTitle(localState.title);
 
-    const dropDownListComponent = DropDownListComponent(localState.buttonTitle, localState.list, localState.getValue);
+    const dropDownListComponent = DropDownListComponent(localState.buttonTitle, localState.list, localState.getValue, localState.gameStatus);
 
     element.append(pointsToWinTitleComponent.element, dropDownListComponent.element);
   

@@ -3,7 +3,7 @@ import { setValue, subscribe, } from '../../../../core/state-manger.proxy.js';
 import { SetTitle } from '../../common/SetTitle/SetTitle.component.js';
 import { DropDownListComponent } from './../../common/DropDownList/DropDownList.component.js';
 
-export function GridSizeComponent(gridSizeBlockValues) {
+export function GridSizeComponent(gridSizeBlockValues, gameStatus) {
     //  console.log("GridSizeComponent created")
 
     if(gridSizeBlockValues.button.title !== GRID_SIZE_BLOCK_VALUES.button.title) {
@@ -18,6 +18,7 @@ export function GridSizeComponent(gridSizeBlockValues) {
         }
 
     const localState = {
+        gameStatus: gameStatus,
         title: gridSizeBlockValues.title,
         buttonTitle:gridSizeBlockValues.button.title,
         list:gridSizeBlockValues.button.payload,
@@ -55,7 +56,7 @@ async function render(element, localState) {
 
     const gridSizeTitleComponent = SetTitle(localState.title);
 
-    const dropDownListComponent = DropDownListComponent(localState.buttonTitle, localState.list, localState.getValue);
+    const dropDownListComponent = DropDownListComponent(localState.buttonTitle, localState.list, localState.getValue, localState.gameStatus);
 
     element.append(gridSizeTitleComponent.element, dropDownListComponent.element);
    

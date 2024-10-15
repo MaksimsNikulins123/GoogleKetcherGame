@@ -41,10 +41,11 @@ function _notifyObservers(name, payload = {}) {
 
 //COMMANDS/SETTERS
 export async function start() {
-    saveSettings();
+    // saveSettings();
     fetch("http://localhost:3000/start");
 }
 export async function playAgain() {
+    // saveSettings();
     fetch("http://localhost:3000/playAgain");
 }
 export async function movePlayer(playerNumber, direction) {
@@ -133,31 +134,9 @@ _notifyObservers(name, payload);
 export async function saveSettings() {
     
     if(localStorage.length === 5) {
-        // _notifyObservers(EVENTS.GAME_STATUS_CHANGED)
-        // const stringifiedSettingsValues = JSON.stringify(localState.settingsValues)
         const stringifiedSettingsValues = JSON.stringify(localStorage)
         await fetch(`http://localhost:3000/saveSettings?newSettings=${stringifiedSettingsValues}`)
-        // await fetch(`http://localhost:3000/saveSettings?newSettings=${localStorage}`)
     } else return;
 }
-// export function  saveValue(newValue) {
 
-//     if(localState.settingsValues.findIndex(object => object.name === newValue.name) < 0) {
-//         localState.settingsValues.push(newValue)
-//     } else {
-//         const index = localState.settingsValues.findIndex(object => object.name === newValue.name)
-//         localState.settingsValues[index] = newValue
-//     }
-//     // console.log(localState.settingsValues)
-//     if(localState.settingsValues.length === 4) {
-//         const startButton = document.getElementById('start-btn')
-//         if(startButton !== null) {
-//             startButton.disabled = false
-//         }
-    
-//         // console.log('Settings values are chousen')
-//         // _notifyObservers(EVENTS.START_BUTTON_STATUS_CHANGED, false)
-//     }
-   
-// }
 

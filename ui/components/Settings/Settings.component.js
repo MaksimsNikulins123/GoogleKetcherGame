@@ -19,11 +19,12 @@ import {
 } from "./Sound/Sound.component.js";
 
 
-export function SettingsComponent() {
+export function SettingsComponent(gameStatus) {
 
-    // console.log("SettingsComponent created")
+    console.log("SettingsComponent created")
 
     const localState = {
+        gameStatus: gameStatus,
         gridSizeBlockValues: null,
         pointsToWinBlockValues: null,
         pointsToLoseBlockValues: null, 
@@ -35,16 +36,6 @@ export function SettingsComponent() {
     element.classList.add('settings');
     element.id = 'settings';
 
-    // const startButtonElement = document.getElementById('start-btn')
-
-    // window.onresize = function () {
-        
-    //     if (window.innerWidth >= 1000) {  
-    //         element.classList.remove('active')
-    //         startButtonElement.classList.remove('hide')
-    //     }
-    // }
-
     render(element, localState)
 
     return {
@@ -53,8 +44,8 @@ export function SettingsComponent() {
     };
 }
 
-async function render(element) {
-    // console.log('Setting component render')
+async function render(element, localState) {
+    console.log('Setting component render')
 
     const gridSizeBlockValuesPromise = getGridSizeBlockValues()
     const gridSizeBlockValues = await gridSizeBlockValuesPromise;
@@ -81,11 +72,11 @@ async function render(element) {
 
     const burgerComponent = BurgerComponent();
 
-    const gridSizeComponent = GridSizeComponent(gridSizeBlockValues);
+    const gridSizeComponent = GridSizeComponent(gridSizeBlockValues, localState.gameStatus);
 
-    const pointsToWinComponent = PointsToWinComponent(pointsToWinBlockValues);
+    const pointsToWinComponent = PointsToWinComponent(pointsToWinBlockValues,  localState.gameStatus);
 
-    const pointsToLoseComponent = PointsToLoseComponent(pointsToLoseBlockValues);
+    const pointsToLoseComponent = PointsToLoseComponent(pointsToLoseBlockValues,  localState.gameStatus);
 
     const soundComponent = SoundComponent(soundStatusResponseBoolean);
 

@@ -1,8 +1,12 @@
-export function DropDownListComponent(buttonTitle, list, getValue) {
+import { GAME_STATUSES } from "../../../../core/constans.js";
+
+export function DropDownListComponent(buttonTitle, list, getValue, gameStatus) {
     // console.log(data)
     // console.log("Dropdown Component created")
 
     const localState = {
+        gameStatus: gameStatus,
+        buttonDisabilityStatus: gameStatus === GAME_STATUSES.IN_PROGRESS ? true : false,
         buttonTitle: buttonTitle,
         list: list,
         cleanupFunctions: [],
@@ -30,6 +34,7 @@ async function render(element, localState) {
     select.classList.add('dropdown-toggle')
     select.setAttribute('type', 'button');
     select.innerHTML = localState.buttonTitle;
+    select.disabled = localState.buttonDisabilityStatus;
 
     const list = document.createElement('ul');
     list.classList.add('dropdown-menu', 'hide')

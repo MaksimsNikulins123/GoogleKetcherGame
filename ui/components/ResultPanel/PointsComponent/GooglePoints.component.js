@@ -3,30 +3,15 @@ import { getGooglePoints, subscribe } from "../../../../core/state-manger.proxy.
 
 
 export function GooglePointsComponent() {
-
+    // console.log('GooglePoints compenent created')
     const element = document.createElement('div');
 
     let observer = (e) => {
-        console.log(e)
+        // console.log(e)
     if (e.name === EVENTS.GOOGLE_SCORE_CHANGED){
         render(element);
     };
     }
-    // let observer = (e) => {
-    //     console.log(e);
-    //     // if ([EVENTS.GOOGLE_SCORES_CHANGED, EVENTS.PLAYER1_MOVED, EVENTS.PLAYER2_MOVED].every(name => name !== e.name)) return;
-    //     // if (e.name === EVENTS.GOOGLE_SCORES_CHANGED){
-    //     //     render(element, );
-    //     // };
-
-    //     // if (e.payload.prevPosition.x === x && e.payload.prevPosition.y === y) {
-    //     //     render(element, x, y, localState);
-    //     // }
-    //     // if (e.payload.newPosition.x === x && e.payload.newPosition.y === y) {
-    //     //     render(element, x, y, localState);
-    //     // }
-
-    // };
 
     subscribe(observer);
 
@@ -46,7 +31,7 @@ export function GooglePointsComponent() {
 }
 
 async function render(element) {
-
+    // console.log('GooglePoints compenent render')
     element.innerHTML = '';
 
     const googlePoints = await getGooglePoints();

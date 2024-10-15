@@ -33,7 +33,6 @@ async function render(element) {
     button.append('START GAME');
     button.disabled = stringToBoolean(localStorage.getItem('startButtonDisableStatus'))
     button.addEventListener('click', () => {
-        // saveSettings()
         start();
     })
     element.append(button);
