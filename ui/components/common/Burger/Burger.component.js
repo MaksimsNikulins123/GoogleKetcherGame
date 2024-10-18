@@ -1,12 +1,5 @@
 export function BurgerComponent() {
     // console.log("Burger Component created")
-    // console.log(elements)
-
-    // const localState = {
-    //     isChecked: soundStatus,
-    //     getValue: getValue
-    // }
-
 
     const element = document.createElement('button');
     element.classList.add('burger-btn');
@@ -27,7 +20,6 @@ export function BurgerComponent() {
        
     })
 
-    // render(element, localState)
     render(element)
 
     return {

@@ -6,7 +6,7 @@ export function DropDownListComponent(buttonTitle, list, getValue, gameStatus) {
 
     const localState = {
         gameStatus: gameStatus,
-        buttonDisabilityStatus: gameStatus === GAME_STATUSES.IN_PROGRESS ? true : false,
+        buttonDisabilityStatus: gameStatus === GAME_STATUSES.SETTINGS ? false : true,
         buttonTitle: buttonTitle,
         list: list,
         cleanupFunctions: [],
@@ -82,29 +82,3 @@ function _toggleDropDownList(list) {
     }
 
 }
-
-
-// const settingsButtonElements = document.getElementsByClassName('dropdown-toggle');
-        
-//         console.log(settingsButtonElements.length)
-
-//         for (let index = 0; index < settingsButtonElements.length; index++) {
-//             const element = settingsButtonElements[index];
-//             // element.classList.add('disabled')
-//             element.disabled = true;
-//             //  return element.disabled;
-//             console.log(element)
-            
-//         }
-        
-        // const buttonArray = Array.from(settingsButtonElements)
-        // settingsButtonElements.forEach((settingsButtonElement) => {settingsButtonElement.classList.add('disabled')})
-        
-      
-        // settingsButtonElements.map(settingsButtonElement => console.log(settingsButtonElement));
-        
-        // console.log(typeof(buttonArray))
-        // console.log(Array.from(settingsButtonElements))
-
-
-        // settingsButtonElement.disabled = true;

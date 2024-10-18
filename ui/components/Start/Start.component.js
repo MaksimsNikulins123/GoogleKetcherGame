@@ -1,21 +1,26 @@
-
-import { stringToBoolean } from './../common/SringToBoolean/StringToBoolean.component.js';
 import {  
-
     start,
 } from "../../../core/state-manger.proxy.js";
+import { ButtonComponent } from '../common/Button/Button.component.js';
 
 
 export function StartComponent(status) {
     // console.log("StartComponent created")
 
-    localStorage.setItem('startButtonDisableStatus', status)
-
+    const localState = {
+        buttonId: 'start-btn',
+        buttonTitle: 'start game',
+        buttonDisableStatus: {
+            key: 'startButtonDisableStatus',
+            value: status
+        },
+        start
+    }
     
     const element = document.createElement('div');
     element.classList.add('content');
 
-    render(element)
+    render(element, localState)
 
     return {
         element,
@@ -23,17 +28,9 @@ export function StartComponent(status) {
     };
 }
 
-async function render(element) {
+async function render(element, localState) {
     // console.log("StartComponent render")
 
-    element.innerHTML = '';
-    const button = document.createElement('button');
-    button.classList.add('start-btn')
-    button.id = 'start-btn';
-    button.append('START GAME');
-    button.disabled = stringToBoolean(localStorage.getItem('startButtonDisableStatus'))
-    button.addEventListener('click', () => {
-        start();
-    })
-    element.append(button);
+    const startButtonComponent = ButtonComponent(localState.buttonId, localState.buttonTitle,  localState.buttonDisableStatus, localState.start)
+    element.append(startButtonComponent.element);
 }

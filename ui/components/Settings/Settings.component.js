@@ -21,7 +21,7 @@ import {
 
 export function SettingsComponent(gameStatus) {
 
-    console.log("SettingsComponent created")
+    // console.log("SettingsComponent created")
 
     const localState = {
         gameStatus: gameStatus,
@@ -45,7 +45,7 @@ export function SettingsComponent(gameStatus) {
 }
 
 async function render(element, localState) {
-    console.log('Setting component render')
+    // console.log('Setting component render')
 
     const gridSizeBlockValuesPromise = getGridSizeBlockValues()
     const gridSizeBlockValues = await gridSizeBlockValuesPromise;
